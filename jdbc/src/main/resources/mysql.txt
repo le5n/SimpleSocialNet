@@ -10,6 +10,8 @@ CREATE TABLE `users`.`users` (
   `username` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `email_UNIQUE` (`email` ASC));
+  ALTER TABLE `users`.`users`
+  ADD COLUMN `profile_pic` BLOB NULL AFTER `username`;
 
   INSERT INTO `users`.`users` (`id`, `name`, `lastname`, `email`, `password`, `username`) VALUES ('1', 'Elena', 'Georgievskaya', 'ellenageor@gmail.com', 'qwerty123', 'le5n');
 
