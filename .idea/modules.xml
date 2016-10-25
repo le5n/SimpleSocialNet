@@ -3,6 +3,17 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/SimpleSocialNet.iml" filepath="$PROJECT_DIR$/.idea/modules/SimpleSocialNet.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/SimpleSocialNet_main.iml" filepath="$PROJECT_DIR$/.idea/modules/SimpleSocialNet_main.iml" group="SimpleSocialNet" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/SimpleSocialNet_test.iml" filepath="$PROJECT_DIR$/.idea/modules/SimpleSocialNet_test.iml" group="SimpleSocialNet" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/core.iml" filepath="$PROJECT_DIR$/.idea/modules/core/core.iml" group="core" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/core_main.iml" filepath="$PROJECT_DIR$/.idea/modules/core/core_main.iml" group="core" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core/core_test.iml" filepath="$PROJECT_DIR$/.idea/modules/core/core_test.iml" group="core" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/jdbc/jdbc.iml" filepath="$PROJECT_DIR$/.idea/modules/jdbc/jdbc.iml" group="jdbc" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/jdbc/jdbc_main.iml" filepath="$PROJECT_DIR$/.idea/modules/jdbc/jdbc_main.iml" group="jdbc" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/jdbc/jdbc_test.iml" filepath="$PROJECT_DIR$/.idea/modules/jdbc/jdbc_test.iml" group="jdbc" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/servlets/servlets.iml" filepath="$PROJECT_DIR$/.idea/modules/servlets/servlets.iml" group="servlets" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/servlets/servlets_main.iml" filepath="$PROJECT_DIR$/.idea/modules/servlets/servlets_main.iml" group="servlets" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/servlets/servlets_test.iml" filepath="$PROJECT_DIR$/.idea/modules/servlets/servlets_test.iml" group="servlets" />
     </modules>
   </component>
 </project>

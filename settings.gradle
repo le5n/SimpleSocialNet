@@ -1,2 +1,5 @@
 rootProject.name = 'SimpleSocialNet'
+include 'core'
+include 'servlets'
+include 'jdbc'
 
