@@ -1,0 +1,21 @@
+CREATE SCHEMA `users` ;
+CREATE SCHEMA `posts` ;
+
+CREATE TABLE `users`.`users` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NOT NULL,
+  `lastname` VARCHAR(45) NOT NULL,
+  `email` VARCHAR(60) NOT NULL,
+  `password` VARCHAR(45) NOT NULL,
+  `username` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `email_UNIQUE` (`email` ASC));
+
+  INSERT INTO `users`.`users` (`id`, `name`, `lastname`, `email`, `password`, `username`) VALUES ('1', 'Elena', 'Georgievskaya', 'ellenageor@gmail.com', 'qwerty123', 'le5n');
+
+CREATE TABLE `users`.`roles` (
+  `user_id` INT NOT NULL,
+  `role` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`user_id`),
+  UNIQUE INDEX `user_id_UNIQUE` (`user_id` ASC));
+

@@ -19,12 +19,12 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="core_main" target="1.5" />
-      <module name="core_test" target="1.5" />
-      <module name="jdbc_main" target="1.5" />
-      <module name="jdbc_test" target="1.5" />
-      <module name="servlets_main" target="1.5" />
-      <module name="servlets_test" target="1.5" />
+      <module name="core_main" target="1.8" />
+      <module name="core_test" target="1.8" />
+      <module name="jdbc_main" target="1.8" />
+      <module name="jdbc_test" target="1.8" />
+      <module name="servlets_main" target="1.8" />
+      <module name="servlets_test" target="1.8" />
       <module name="SimpleSocialNet_main" target="1.5" />
       <module name="SimpleSocialNet_test" target="1.5" />
     </bytecodeTargetLevel>
