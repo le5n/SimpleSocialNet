@@ -9,15 +9,22 @@ import social.User;
 import java.util.Collection;
 
 public class SqlUserDaoTest {
+    private SqlUserDao sqlUserDao = new SqlUserDao("" +
+            "D:\\Программы\\SimpleSocialNet\\jdbc\\src\\test\\resources\\userData.properties");
+    private User expectedUser = new User(1,"Elena","Georgievskaya", "ellenageor@gmail.com", "qwerty123", "le5n");
 
     @Test
     public void getAll() throws Exception{
-        SqlUserDao sqlUserDao = new SqlUserDao("" +
-                "D:\\Программы\\SimpleSocialNet\\jdbc\\src\\test\\resources\\userData.properties");
         Collection<User> actualCollection = sqlUserDao.getAll();
 
-        User expectedUser = new User(1,"Elena","Georgievskaya", "ellenageor@gmail.com", "qwerty123", "le5n");
-
         Assert.assertTrue(actualCollection.contains(expectedUser));
+    }
+
+    @Test
+    public void getById() throws Exception{
+        User actualUser = sqlUserDao.getUserById(1);
+        System.out.println(actualUser);
+
+        Assert.assertEquals(expectedUser,actualUser);
     }
 }
