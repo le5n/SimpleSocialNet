@@ -38,25 +38,14 @@ public class SqlPostDao implements PostDao {
 
     @Override
     public Post getByPostId(int postId) {
-        String prepStatementSearch = "SELECT post_id FROM posts.posts;";
         String prepStatementPost = "SELECT * FROM posts.posts WHERE post_id=?";
-        int foundId = 0;
         Post post = null;
 
         try (Connection connection = connectionPool.getConnection();
-             PreparedStatement prepStPostId = connection.prepareStatement(prepStatementSearch);
              PreparedStatement prepStPostData = connection.prepareStatement(prepStatementPost)) {
 
-            ResultSet resultSet = prepStPostId.executeQuery();
-
-            while (resultSet.next()) {
-                if (resultSet.getInt("post_id") == postId) {
-                    foundId = resultSet.getInt("post_id");
-                }
-            }
-
-            prepStPostData.setInt(1, foundId);
-            resultSet = prepStPostData.executeQuery();
+            prepStPostData.setInt(1, postId);
+            ResultSet resultSet = prepStPostData.executeQuery();
             while (resultSet.next()) {
                 post = new Post(
                         resultSet.getInt("post_id"),
