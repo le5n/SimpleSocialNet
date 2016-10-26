@@ -9,7 +9,7 @@ import java.util.Properties;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
-class ConnectionPool implements AutoCloseable {
+public class ConnectionPool implements AutoCloseable {
     private BlockingQueue<PooledConnection> connectionQueue;
     private static ConnectionPool instance;
 
@@ -47,7 +47,7 @@ class ConnectionPool implements AutoCloseable {
         }
     }
 
-    Connection getConnection() throws InterruptedException {
+   public Connection getConnection() throws InterruptedException {
         return connectionQueue.take();
     }
 
