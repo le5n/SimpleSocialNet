@@ -1,13 +1,13 @@
 package social;
 
 public class Post {
-    private final int userId;
     private final int postId;
+    private final int userId;
     private final String postText;
 
-    public Post(int userId, int postId, String postText) {
-        this.userId = userId;
+    public Post(int postId, int userId, String postText) {
         this.postId = postId;
+        this.userId = userId;
         this.postText = postText;
     }
 
@@ -30,5 +30,14 @@ public class Post {
         result = 31 * result + postId;
         result = 31 * result + (postText != null ? postText.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Post{" +
+                "userId=" + userId +
+                ", postId=" + postId +
+                ", postText='" + postText + '\'' +
+                '}';
     }
 }
