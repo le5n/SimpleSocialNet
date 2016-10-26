@@ -43,25 +43,14 @@ public class SqlUserDao implements UserDao {
 
     @Override
     public User getUserById(int id) {
-        String prepStatementSearch = "SELECT id FROM users.users;";
         String prepStatementUser = "SELECT * FROM users.users WHERE id=?";
-        int foundId = 0;
         User user = null;
 
         try (Connection connection = connectionPool.getConnection();
-             PreparedStatement prepStSearchId = connection.prepareStatement(prepStatementSearch);
              PreparedStatement prepStUser = connection.prepareStatement(prepStatementUser)) {
 
-            ResultSet resultSet = prepStSearchId.executeQuery();
-
-            while (resultSet.next()) {
-                if (resultSet.getInt(1) == id) {
-                    foundId = resultSet.getInt(1);
-                }
-            }
-
-            prepStUser.setInt(1, foundId);
-            resultSet = prepStUser.executeQuery();
+            prepStUser.setInt(1, id);
+            ResultSet resultSet = prepStUser.executeQuery();
             while (resultSet.next()) {
                 user = new User(
                         resultSet.getInt("id"),
@@ -73,12 +62,10 @@ public class SqlUserDao implements UserDao {
                 );
             }
 
-            return user;
-
         } catch (InterruptedException | SQLException e) {
             e.printStackTrace();
         }
 
-        return null;
+        return user;
     }
 }

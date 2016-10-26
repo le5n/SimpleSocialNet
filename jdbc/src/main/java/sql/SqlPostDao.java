@@ -74,25 +74,14 @@ public class SqlPostDao implements PostDao {
 
     @Override
     public Collection<Post> getPostsByUserId(int userId) {
-        String prepStatementSearch = "SELECT user_id FROM posts.posts;";
         String prepStatementPost = "SELECT * FROM posts.posts WHERE user_id=?";
-        int foundId = 0;
         Collection<Post> UserPosts = new ArrayList<>();
 
         try (Connection connection = connectionPool.getConnection();
-             PreparedStatement prepStSearchUser = connection.prepareStatement(prepStatementSearch);
              PreparedStatement prepStUserPosts = connection.prepareStatement(prepStatementPost)) {
 
-            ResultSet resultSet = prepStSearchUser.executeQuery();
-
-            while (resultSet.next()) {
-                if (resultSet.getInt(1) == userId) {
-                    foundId = resultSet.getInt(1);
-                }
-            }
-
-            prepStUserPosts.setInt(1, foundId);
-            resultSet = prepStUserPosts.executeQuery();
+            prepStUserPosts.setInt(1, userId);
+            ResultSet resultSet = prepStUserPosts.executeQuery();
             while (resultSet.next()) {
                 UserPosts.add(new Post(
                         resultSet.getInt("post_id"),

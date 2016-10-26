@@ -23,7 +23,6 @@ public class SqlUserDaoTest {
     @Test
     public void getById() throws Exception{
         User actualUser = sqlUserDao.getUserById(1);
-        System.out.println(actualUser);
 
         Assert.assertEquals(expectedUser,actualUser);
     }
