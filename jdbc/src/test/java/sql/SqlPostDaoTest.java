@@ -22,7 +22,7 @@ public class SqlPostDaoTest {
     @Test
     public void getByPostId() throws Exception{
         Post actualPost = sqlPostDao.getByPostId(1);
-        System.out.println(actualPost);
+
         Assert.assertEquals(expectedPost,actualPost);
     }
 

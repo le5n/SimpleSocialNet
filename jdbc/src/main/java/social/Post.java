@@ -32,12 +32,4 @@ public class Post {
         return result;
     }
 
-    @Override
-    public String toString() {
-        return "Post{" +
-                "userId=" + userId +
-                ", postId=" + postId +
-                ", postText='" + postText + '\'' +
-                '}';
-    }
 }
