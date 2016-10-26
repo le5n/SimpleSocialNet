@@ -4,7 +4,6 @@ import common.ConnectionPool;
 import dao.UserDao;
 import social.User;
 
-import javax.jws.soap.SOAPBinding;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -50,24 +49,19 @@ public class SqlUserDao implements UserDao {
         User user = null;
 
         try (Connection connection = connectionPool.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(prepStatementSearch);
-             PreparedStatement preparedStatement1 = connection.prepareStatement(prepStatementUser)) {
+             PreparedStatement prepStSearchId = connection.prepareStatement(prepStatementSearch);
+             PreparedStatement prepStUser = connection.prepareStatement(prepStatementUser)) {
 
-            ArrayList<Integer> ids = new ArrayList<>();
-
-            ResultSet resultSet = preparedStatement.executeQuery();
+            ResultSet resultSet = prepStSearchId.executeQuery();
 
             while (resultSet.next()) {
-                ids.add(resultSet.getInt(1));
-            }
-
-            for (int i = 0; i < ids.size(); i++) {
-                if (ids.get(i) == id) {
-                    foundId = ids.get(i);
+                if (resultSet.getInt(1) == id) {
+                    foundId = resultSet.getInt(1);
                 }
             }
-            preparedStatement1.setInt(1, foundId);
-            resultSet = preparedStatement1.executeQuery();
+
+            prepStUser.setInt(1, foundId);
+            resultSet = prepStUser.executeQuery();
             while (resultSet.next()) {
                 user = new User(
                         resultSet.getInt("id"),
