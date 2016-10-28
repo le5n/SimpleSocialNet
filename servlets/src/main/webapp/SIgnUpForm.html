@@ -43,13 +43,14 @@
 
 <div class="container">
 
-    <form class="form-signin">
+    <form class="form-signin" action="AddUserServlet">
         <h2 class="form-signin-heading">Please fill in the form</h2>
-        <input type="text" placeholder="Name"> <br>
-        <input type="text" placeholder="Last name"> <br>
-        <input type="text" placeholder="Email"> <br>
-        <input type="password" placeholder="Password"> <br>
-        <input type="text" placeholder="social.User name"> <br>
+        <input type="text" placeholder="username" name="username"> <br>
+        <input type="password" placeholder="password" name="password"> <br>
+        <input type="password" placeholder="repeat password" name="repeatPassword"> <br>
+        <input type="text" placeholder="name" name="name"> <br>
+        <input type="text" placeholder="last name" name="lastname"> <br>
+        <input type="text" placeholder="email" name="email"> <br>
         <button class="btn btn-large btn-primary" type="submit" id=1>Sign up</button>
     </form>
 

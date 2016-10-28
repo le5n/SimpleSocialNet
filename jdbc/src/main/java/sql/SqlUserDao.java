@@ -13,8 +13,9 @@ public class SqlUserDao implements UserDao {
 
     private static ConnectionPool connectionPool;
 
-    public SqlUserDao(String pathToConfig) {
-        connectionPool = ConnectionPool.getInstance(pathToConfig);
+    public SqlUserDao() {
+        connectionPool = ConnectionPool.getInstance(
+                "D:\\Программы\\SimpleSocialNet\\jdbc\\src\\test\\resources\\userData.properties");
     }
 
     @Override
@@ -67,5 +68,24 @@ public class SqlUserDao implements UserDao {
         }
 
         return user;
+    }
+
+    public void addUser(User user){
+        String prepSt = "INSERT INTO `users`.`users` (`name`, `lastname`, `email`, `password`, `username`) " +
+                "VALUES (?, ?, ?, ?, ?);";
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement prepStUser = connection.prepareStatement(prepSt)){
+            prepStUser.setString(1,user.getName());
+            prepStUser.setString(2,user.getLastName());
+            prepStUser.setString(3,user.getEmail());
+            prepStUser.setString(4,user.getPassword());
+            prepStUser.setString(5,user.getUserName());
+
+            prepStUser.execute();
+
+        }
+        catch (InterruptedException | SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

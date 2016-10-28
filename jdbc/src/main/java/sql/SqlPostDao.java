@@ -12,8 +12,9 @@ public class SqlPostDao implements PostDao {
     private static ConnectionPool connectionPool;
     private Collection<Post> allPosts = new ArrayList<>();
 
-    public SqlPostDao(String pathToConfig) {
-        connectionPool = ConnectionPool.getInstance(pathToConfig);
+    public SqlPostDao() {
+      connectionPool = ConnectionPool.getInstance(
+              "D:\\Программы\\SimpleSocialNet\\jdbc\\src\\test\\resources\\postData.properties");
     }
 
     @Override

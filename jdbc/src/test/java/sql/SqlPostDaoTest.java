@@ -10,8 +10,8 @@ import java.util.Collection;
 
 public class SqlPostDaoTest {
     private Post expectedPost = new Post(1,1,"hello world");
-    private SqlPostDao sqlPostDao = new SqlPostDao("" +
-            "D:\\Программы\\SimpleSocialNet\\jdbc\\src\\test\\resources\\postData.properties");
+    private SqlPostDao sqlPostDao = new SqlPostDao();
+    // "D:\\Программы\\SimpleSocialNet\\jdbc\\src\\test\\resources\\postData.properties"
     @Test
     public void getAll() throws Exception{
         Collection<Post> actualCollection = sqlPostDao.getAll();

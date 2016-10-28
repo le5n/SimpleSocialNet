@@ -9,9 +9,9 @@ import social.User;
 import java.util.Collection;
 
 public class SqlUserDaoTest {
-    private SqlUserDao sqlUserDao = new SqlUserDao("" +
-            "D:\\Программы\\SimpleSocialNet\\jdbc\\src\\test\\resources\\userData.properties");
+    private SqlUserDao sqlUserDao = new SqlUserDao();
     private User expectedUser = new User(1,"Elena","Georgievskaya", "ellenageor@gmail.com", "qwerty123", "le5n");
+    //"D:\\Программы\\SimpleSocialNet\\jdbc\\src\\test\\resources\\userData.properties"
 
     @Test
     public void getAll() throws Exception{
@@ -26,4 +26,5 @@ public class SqlUserDaoTest {
 
         Assert.assertEquals(expectedUser,actualUser);
     }
+
 }
