@@ -5,6 +5,9 @@
     <title>Name</title>
   </head>
   <body>
-  text in body
+  <%--<jsp:useBean id="firstTry" scope="request"/>--%>
+
+<%--<%firstTry.getClass();%>--%>
+  hello
   </body>
 </html>
