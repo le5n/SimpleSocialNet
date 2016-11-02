@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Sign up</title>
-    <script>src="fail.js"</script>
+    <title>Sk8</title>
 
     <style type="text/css">
         body {
@@ -24,6 +23,8 @@
             -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
             -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
             box-shadow: 0 1px 2px rgba(0,0,0,.05);
+            font-size: 16px;
+            height: auto;
         }
         .form-signin .form-signin-heading,
         .form-signin .checkbox {
@@ -42,17 +43,19 @@
 
 <body>
 
-<div class="container">
+<div class="container" align="middle">
 
-    <form class="form-signin" action="/AddUserServlet" method="POST">
-        <h2 class="form-signin-heading">Please fill in the form</h2>
-        <input type="text" placeholder="username" name="username" id="username" > <br>
-        <input type="password" placeholder="password" name="password" id="password"> <br>
-        <input type="password" placeholder="repeat password" name="repeatPassword" id="repeatPassword"> <br>
-        <input type="text" placeholder="name" name="name" id="name"> <br>
-        <input type="text" placeholder="last name" name="lastname" id="lastname"> <br>
-        <input type="text" placeholder="email" name="email" id="email"> <br>
-        <button class="btn btn-large btn-primary" type="submit" id=1>Sign up</button>
+    <form class="form-signin" action="/userPage">
+        Something went wrong.....<br>
+        <ul>
+            <li type="circle">You left some fields empty or</li>
+            <li type="circle">You made a mistake while repeating password</li>
+            <li type="circle">You entered incorrect email</li>
+            <li type="circle">You already have an account</li>
+        </ul>
+    </form>
+    <form action="SIgnUpForm.html">
+        <button class="btn btn-large btn-primary" type="submit">Go back</button>
     </form>
 
 </div>

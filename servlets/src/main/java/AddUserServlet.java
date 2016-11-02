@@ -8,44 +8,48 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 
-@WebServlet( urlPatterns = "/AddUserServlet")
+@WebServlet(urlPatterns = "/AddUserServlet")
 public class AddUserServlet extends HttpServlet {
 
     private SqlUserDao sqlUserDao = new SqlUserDao();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    }
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String name = request.getParameter("name");
         String lastName = request.getParameter("lastname");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         String userName = request.getParameter("username");
         String checkPas = request.getParameter("repeatPassword");
+        String[] args = new String[]{name, lastName, password, checkPas, email, userName};
 
-        if(check(password, checkPas) || correctEmail(email)){
-            User user = new User(1,name,lastName, email, password, userName);
-            sqlUserDao.addUser(user);
+        for (int i = 0; i < args.length; i++) {
+            if (args[i].equals("")) {
+                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/fail.html");
+                if (dispatcher != null) {
+                    dispatcher.forward(request, response);
+                }
+            }
         }
-        else {
-            PrintWriter out = response.getWriter();
-            out.print("<strong>Incorrect password!</strong>");
+            if (checkPas.equals(password) && correctEmail(email)) {
+                User user = new User(1, name, lastName, email, password, userName);
+                sqlUserDao.addUser(user);
+                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/RegSuccsess.html");
+                if (dispatcher != null) {
+                    dispatcher.forward(request, response);
+                }
+            } else {
+                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/fail.html");
+                if (dispatcher != null) {
+                    dispatcher.forward(request, response);
+                }
+            }
+
         }
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/RegSuccsess.html");
-        if (dispatcher != null) {
-            dispatcher.forward(request, response);
-        }
 
-    }
 
-    private boolean check(String password, String repeatPassword){
-        return password.equals(repeatPassword);
-    }
 
-    private boolean correctEmail(String email){
+    private boolean correctEmail(String email) {
         return email.matches("\\w{1,25}[@]\\w{1,10}\\.\\w{2,3}");
     }
 }
