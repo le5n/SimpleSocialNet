@@ -25,29 +25,27 @@ public class AddUserServlet extends HttpServlet {
 
         for (int i = 0; i < args.length; i++) {
             if (args[i].equals("")) {
-                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/fail.html");
+                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/registration/fail.html");
                 if (dispatcher != null) {
                     dispatcher.forward(request, response);
                 }
             }
         }
-            if (checkPas.equals(password) && correctEmail(email)) {
-                User user = new User(1, name, lastName, email, password, userName);
-                sqlUserDao.addUser(user);
-                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/RegSuccsess.html");
-                if (dispatcher != null) {
-                    dispatcher.forward(request, response);
-                }
-            } else {
-                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/fail.html");
-                if (dispatcher != null) {
-                    dispatcher.forward(request, response);
-                }
+        if (checkPas.equals(password) && correctEmail(email)) {
+            User user = new User(1, name, lastName, email, password, userName);
+            sqlUserDao.addUser(user);
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/registration/RegSuccsess.html");
+            if (dispatcher != null) {
+                dispatcher.forward(request, response);
             }
-
+        } else {
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/registration/fail.html");
+            if (dispatcher != null) {
+                dispatcher.forward(request, response);
+            }
         }
 
-
+    }
 
     private boolean correctEmail(String email) {
         return email.matches("\\w{1,25}[@]\\w{1,10}\\.\\w{2,3}");

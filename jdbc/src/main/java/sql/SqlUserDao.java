@@ -12,17 +12,21 @@ public class SqlUserDao implements UserDao {
     private Collection<User> allUsers = new ArrayList<>();
 
     private static ConnectionPool connectionPool;
+    private final String GET_ALL_USERS = "SELECT * FROM users.users;";
+    private final String GET_USER_BY_ID = "SELECT * FROM users.users WHERE id=?";
+    private final String ADD_USER = "INSERT INTO `users`.`users` (`name`, `lastname`, `email`, `password`, `username`) " +
+            "VALUES (?, ?, ?, ?, ?);";
 
     public SqlUserDao() {
         connectionPool = ConnectionPool.getInstance(
-                "D:\\Программы\\SimpleSocialNet\\jdbc\\src\\test\\resources\\userData.properties");
+                "D:\\Программы\\SimpleSocialNet\\jdbc\\src\\main\\resources\\userData.properties");
     }
 
     @Override
     public Collection<User> getAll() {
         try (Connection connection = connectionPool.getConnection();
              Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery("SELECT * FROM users.users;")) {
+             ResultSet resultSet = statement.executeQuery(GET_ALL_USERS)) {
             while (resultSet.next()) {
                 allUsers.add(
                         new User(
@@ -44,11 +48,10 @@ public class SqlUserDao implements UserDao {
 
     @Override
     public User getUserById(int id) {
-        String prepStatementUser = "SELECT * FROM users.users WHERE id=?";
         User user = null;
 
         try (Connection connection = connectionPool.getConnection();
-             PreparedStatement prepStUser = connection.prepareStatement(prepStatementUser)) {
+             PreparedStatement prepStUser = connection.prepareStatement(GET_USER_BY_ID)) {
 
             prepStUser.setInt(1, id);
             ResultSet resultSet = prepStUser.executeQuery();
@@ -70,21 +73,19 @@ public class SqlUserDao implements UserDao {
         return user;
     }
 
-    public void addUser(User user){
-        String prepSt = "INSERT INTO `users`.`users` (`name`, `lastname`, `email`, `password`, `username`) " +
-                "VALUES (?, ?, ?, ?, ?);";
+    public void addUser(User user) {
         try (Connection connection = connectionPool.getConnection();
-             PreparedStatement prepStUser = connection.prepareStatement(prepSt)){
-            prepStUser.setString(1,user.getName());
-            prepStUser.setString(2,user.getLastName());
-            prepStUser.setString(3,user.getEmail());
-            prepStUser.setString(4,user.getPassword());
-            prepStUser.setString(5,user.getUserName());
+             PreparedStatement prepStUser = connection.prepareStatement(ADD_USER)) {
+
+            prepStUser.setString(1, user.getName());
+            prepStUser.setString(2, user.getLastName());
+            prepStUser.setString(3, user.getEmail());
+            prepStUser.setString(4, user.getPassword());
+            prepStUser.setString(5, user.getUserName());
 
             prepStUser.execute();
 
-        }
-        catch (InterruptedException | SQLException e) {
+        } catch (InterruptedException | SQLException e) {
             e.printStackTrace();
         }
     }
