@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class SqlUserDao implements UserDao {
+
     private Collection<User> allUsers = new ArrayList<>();
 
     private static ConnectionPool connectionPool;
@@ -16,6 +17,7 @@ public class SqlUserDao implements UserDao {
     private final String GET_USER_BY_ID = "SELECT * FROM users.users WHERE id=?";
     private final String ADD_USER = "INSERT INTO `users`.`users` (`name`, `lastname`, `email`, `password`, `username`) " +
             "VALUES (?, ?, ?, ?, ?);";
+    private static final String SET_ROLE = "INSERT INTO `users`.`roles` (`username`, `role`) VALUES (?,?);";
 
     public SqlUserDao() {
         connectionPool = ConnectionPool.getInstance(
@@ -71,6 +73,20 @@ public class SqlUserDao implements UserDao {
         }
 
         return user;
+    }
+
+    @Override
+    public void setRole(String username, String role) {
+        try (Connection connection = connectionPool.getConnection();
+        PreparedStatement prepSt = connection.prepareStatement(SET_ROLE)){
+            prepSt.setString(1,username);
+            prepSt.setString(2,role);
+
+            prepSt.execute();
+        }
+        catch (InterruptedException | SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void addUser(User user) {

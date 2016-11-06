@@ -25,7 +25,7 @@ public class AddUserServlet extends HttpServlet {
 
         for (int i = 0; i < args.length; i++) {
             if (args[i].equals("")) {
-                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/registration/fail.html");
+                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/registration/error.html");
                 if (dispatcher != null) {
                     dispatcher.forward(request, response);
                 }
@@ -34,12 +34,13 @@ public class AddUserServlet extends HttpServlet {
         if (checkPas.equals(password) && correctEmail(email)) {
             User user = new User(1, name, lastName, email, password, userName);
             sqlUserDao.addUser(user);
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/registration/RegSuccsess.html");
+            sqlUserDao.setRole(userName,"user");
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/registration/success.html");
             if (dispatcher != null) {
                 dispatcher.forward(request, response);
             }
         } else {
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/registration/fail.html");
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/registration/error.html");
             if (dispatcher != null) {
                 dispatcher.forward(request, response);
             }
