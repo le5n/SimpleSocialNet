@@ -6,25 +6,27 @@
 <script>
     alert("welcome");
 </script>
-    <link rel="stylesheet" href="../_styles/style.css">
+    <link rel="stylesheet" href="_styles/style.css">
 </head>
 
 <body>
 
 <div class="container">
 
-    <form class="form-signin" method="post">
+    <form class="form-signin" method="post" action="/Login">
         <h2 class="form-signin-heading">Please sign in</h2>
-        <input type="text" class="input-block-level" placeholder="Email address">
-        <input type="password" class="input-block-level" placeholder="Password"> <br>
+        <input type="text" class="input-block-level" placeholder="Email" name="email">
+        <input type="password" class="input-block-level" placeholder="Password" name="password"> <br>
         <button class="btn btn-large btn-primary" type="submit">Sign in</button>
     </form>
     <form class="form-signin" action="/registration/register.html">
-        <strong><big>Not registered yet? </big></strong> <br> <br>
+        <strong>Not registered yet?</strong> <br> <br>
         <button class="btn btn-large btn-primary" type="submit">Sign up</button>
     </form>
 
 </div>
+</body>
+</html>
 
 
 

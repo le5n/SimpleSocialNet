@@ -22,6 +22,8 @@ CREATE TABLE `users`.`roles` (
   `role` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE INDEX `user_id_UNIQUE` (`user_id` ASC));
+  ALTER TABLE `users`.`roles`
+  CHANGE COLUMN `user_id` `email` VARCHAR(100) NOT NULL ;
 
 CREATE TABLE `posts`.`posts` (
   `post_id` INT NOT NULL AUTO_INCREMENT,
