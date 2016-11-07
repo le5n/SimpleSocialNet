@@ -1,7 +1,7 @@
 package dao;
 
-import Exceptions.UserNotFoundException;
 import social.User;
+import exceptions.UserNotFoundException;
 
 import java.util.Collection;
 

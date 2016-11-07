@@ -1,7 +1,7 @@
 
 import social.User;
 import sql.SqlUserDao;
-import Exceptions.UserNotFoundException;
+import exceptions.UserNotFoundException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
