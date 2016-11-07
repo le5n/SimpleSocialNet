@@ -1,6 +1,6 @@
 package sql;
 
-import exceptions.UserNotFoundException;
+import Exceptions.UserNotFoundException;
 import common.ConnectionPool;
 import dao.UserDao;
 import security.StringEncryptUtil;
@@ -77,7 +77,7 @@ public class SqlUserDao implements UserDao {
     }
 
     @Override
-    public User getUserById(int id) throws UserNotFoundException{
+    public User getUserById(int id) throws UserNotFoundException {
         User user = null;
 
         try (Connection connection = connectionPool.getConnection();
