@@ -1,6 +1,6 @@
 package sql;
 
-import Exceptions.UserNotFoundException;
+import exceptions.UserNotFoundException;
 import common.ConnectionPool;
 import dao.UserDao;
 import social.User;

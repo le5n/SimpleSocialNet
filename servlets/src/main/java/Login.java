@@ -1,4 +1,4 @@
-import Exceptions.UserNotFoundException;
+import exceptions.UserNotFoundException;
 import social.User;
 import sql.SqlUserDao;
 
@@ -22,10 +22,11 @@ public class Login extends HttpServlet {
         try {
             User user = sqlUserDao.getUserByEmail(typedEmail);
             if (user.getPassword().equals(typedPassword)) {
-                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/page/userPage.html");
-                dispatcher.forward(request, response);
                 HttpSession session = request.getSession(true);
                 session.setAttribute("email", typedEmail);
+
+                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/page/userPage.html");
+                dispatcher.forward(request, response);
             } else {
                 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/error.html");
                 dispatcher.forward(request, response);
