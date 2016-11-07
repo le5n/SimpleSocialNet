@@ -17,8 +17,14 @@ public class SqlPostDao implements PostDao {
     private final String GET_POSTS_BY_USER_ID = "SELECT * FROM posts.posts WHERE user_id=?";
 
     public SqlPostDao() {
-        connectionPool = ConnectionPool.getInstance(
-                "D:\\Программы\\SimpleSocialNet\\jdbc\\src\\main\\resources\\postData.properties");
+        if (connectionPool == null) {
+            synchronized (ConnectionPool.class) {
+                if (connectionPool == null) {
+                    connectionPool = ConnectionPool.getInstance(
+                            "D:\\Программы\\SimpleSocialNet\\jdbc\\src\\main\\resources\\postData.properties");
+                }
+            }
+        }
     }
 
     @Override

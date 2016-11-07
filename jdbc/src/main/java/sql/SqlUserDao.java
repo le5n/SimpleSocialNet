@@ -3,6 +3,7 @@ package sql;
 import exceptions.UserNotFoundException;
 import common.ConnectionPool;
 import dao.UserDao;
+import security.StringEncryptUtil;
 import social.User;
 
 import java.sql.*;
@@ -22,8 +23,33 @@ public class SqlUserDao implements UserDao {
     private static final String SET_ROLE = "INSERT INTO `users`.`roles` (`email`, `role`) VALUES (?,?);";
 
     public SqlUserDao() {
-        connectionPool = ConnectionPool.getInstance(
-                "D:\\Программы\\SimpleSocialNet\\jdbc\\src\\main\\resources\\userData.properties");
+        if (connectionPool == null) {
+            synchronized (ConnectionPool.class) {
+                if (connectionPool == null) {
+                    connectionPool = ConnectionPool.getInstance(
+                            "D:\\\\Программы\\\\SimpleSocialNet\\\\jdbc\\\\src\\\\main\\\\resources\\\\userData.properties");
+                }
+            }
+        }
+    }
+
+    public void addUser(User user) {
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement prepStUser = connection.prepareStatement(ADD_USER)) {
+
+            String hash = StringEncryptUtil.encrypt(user.getPassword());
+
+            prepStUser.setString(1, user.getName());
+            prepStUser.setString(2, user.getLastName());
+            prepStUser.setString(3, user.getEmail());
+            prepStUser.setString(4, hash);
+            prepStUser.setString(5, user.getUserName());
+
+            prepStUser.execute();
+
+        } catch (InterruptedException | SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -51,7 +77,7 @@ public class SqlUserDao implements UserDao {
     }
 
     @Override
-    public User getUserById(int id) throws UserNotFoundException {
+    public User getUserById(int id) throws UserNotFoundException{
         User user = null;
 
         try (Connection connection = connectionPool.getConnection();
@@ -112,23 +138,6 @@ public class SqlUserDao implements UserDao {
             prepSt.setString(2, role);
 
             prepSt.execute();
-        } catch (InterruptedException | SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void addUser(User user) {
-        try (Connection connection = connectionPool.getConnection();
-             PreparedStatement prepStUser = connection.prepareStatement(ADD_USER)) {
-
-            prepStUser.setString(1, user.getName());
-            prepStUser.setString(2, user.getLastName());
-            prepStUser.setString(3, user.getEmail());
-            prepStUser.setString(4, user.getPassword());
-            prepStUser.setString(5, user.getUserName());
-
-            prepStUser.execute();
-
         } catch (InterruptedException | SQLException e) {
             e.printStackTrace();
         }
