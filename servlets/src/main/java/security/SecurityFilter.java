@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Map;
 
-@WebFilter(urlPatterns = {"/page/userPage", "/index.jsp", "/page/uploadPhoto"})
+@WebFilter(urlPatterns = {"/page/userPage.html", "/index.jsp", "/page/uploadPhoto.html"})
 public class SecurityFilter extends HttpFilter {
     private static final String KEY = "key";
     private UserDao userDao;
@@ -29,10 +29,14 @@ public class SecurityFilter extends HttpFilter {
 
     @Override
     public void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
-        HttpSession session = request.getSession(true);
-
-        if (session.getAttribute(KEY) != null)
+        HttpSession session = request.getSession();
+        if (session.getAttribute(KEY) != null) {
             chain.doFilter(request, response);
+        } else{
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/getin/login.html");
+            requestDispatcher.forward(request, response);
+        }
+
 
         Map<String, String[]> parameterMap = request.getParameterMap();
 
@@ -40,7 +44,8 @@ public class SecurityFilter extends HttpFilter {
             try {
                 User user = authorize(parameterMap);
                 if (user != null) {
-                    session.setAttribute(KEY, "the key");
+                    session.setAttribute(KEY, new Object());
+                    System.out.println("attribute set");
                     chain.doFilter(request, response);
                 } else
                     request.getRequestDispatcher("/getin/error.html").forward(request, response);

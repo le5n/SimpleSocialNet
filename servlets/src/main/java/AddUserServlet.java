@@ -34,7 +34,7 @@ public class AddUserServlet extends HttpServlet {
         if (checkPas.equals(password) && correctEmail(email)) {
             User user = new User(1, name, lastName, email, password, userName);
             sqlUserDao.addUser(user);
-            sqlUserDao.setRole(userName,"user");
+            //sqlUserDao.setRole(userName,"user");
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/registration/success.html");
             if (dispatcher != null) {
                 dispatcher.forward(request, response);

@@ -15,8 +15,10 @@ import java.io.IOException;
 
 @WebServlet(urlPatterns = "/Login")
 public class Login extends HttpServlet {
+    private static final String KEY = "key";
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         SqlUserDao sqlUserDao = new SqlUserDao();
+        HttpSession session;
 
         String typedEmail = request.getParameter("email");
         String typedPassword = request.getParameter("password");
@@ -25,8 +27,11 @@ public class Login extends HttpServlet {
         try {
             User user = sqlUserDao.getUserByEmail(typedEmail);
             if (user.getPassword().equals(hash)) {
-                HttpSession session = request.getSession(true);
-                session.setAttribute("email", typedEmail);
+
+                session = request.getSession(true);
+                session.setAttribute(KEY,new Object());
+                System.out.println("session load");
+
 
                 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/page/userPage.html");
                 dispatcher.forward(request, response);
