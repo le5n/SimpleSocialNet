@@ -23,8 +23,8 @@ public class AddUserServlet extends HttpServlet {
         String checkPas = request.getParameter("repeatPassword");
         String[] args = new String[]{name, lastName, password, checkPas, email, userName};
 
-        for (int i = 0; i < args.length; i++) {
-            if (args[i].equals("")) {
+        for (String arg : args) {
+            if (arg.equals("")) {
                 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/registration/error.html");
                 if (dispatcher != null) {
                     dispatcher.forward(request, response);

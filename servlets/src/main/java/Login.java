@@ -4,7 +4,6 @@ import security.StringEncryptUtil;
 import social.User;
 import sql.SqlUserDao;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,6 +15,7 @@ import java.io.IOException;
 @WebServlet(urlPatterns = "/Login")
 public class Login extends HttpServlet {
     private static final String KEY = "key";
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         SqlUserDao sqlUserDao = new SqlUserDao();
         HttpSession session;
@@ -29,24 +29,21 @@ public class Login extends HttpServlet {
             if (user.getPassword().equals(hash)) {
 
                 session = request.getSession(true);
-                session.setAttribute(KEY,new Object());
-                System.out.println("session load");
+                session.setAttribute(KEY, new Object());
 
-
-                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/page/userPage.html");
-                dispatcher.forward(request, response);
+                forward("/page/userPage.html",request,response);
             } else {
-                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/getin/error.html");
-                dispatcher.forward(request, response);
-
+                forward("/getin/login.html", request,response);
             }
         } catch (UserNotFoundException e) {
             e.printStackTrace();
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/getin/error.html");
-            dispatcher.forward(request, response);
+            forward("/getin/login.html", request,response);
         }
     }
 
+    private void forward(String path, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher(path).forward(request, response);
+    }
 
 }
 
