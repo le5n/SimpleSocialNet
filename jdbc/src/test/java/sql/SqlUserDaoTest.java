@@ -1,6 +1,7 @@
 package sql;
 
 import common.ConnectionPool;
+import dao.UserDao;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,5 +27,4 @@ public class SqlUserDaoTest {
 
         Assert.assertEquals(expectedUser,actualUser);
     }
-
 }

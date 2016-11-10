@@ -12,18 +12,15 @@ CREATE TABLE `users`.`users` (
   UNIQUE INDEX `email_UNIQUE` (`email` ASC));
   ALTER TABLE `users`.`users`
   ADD COLUMN `profile_pic` BLOB NULL AFTER `username`;
+ALTER TABLE `users`.`users`
+  DROP PRIMARY KEY,
+  ADD PRIMARY KEY (`email`);
+
 
   INSERT INTO `users`.`users` (`id`, `name`, `lastname`, `email`, `password`, `username`) VALUES ('1', 'Elena', 'Georgievskaya', 'ellenageor@gmail.com', 'qwerty123', 'le5n');
   INSERT INTO `users`.`users` (`id`, `name`, `lastname`, `email`, `password`, `username`) VALUES ('2', 'Anna', 'Petrova', 'example@mail.ru', '321ytrewq', 'annap');
 
 
-CREATE TABLE `users`.`roles` (
-  `user_id` INT NOT NULL,
-  `role` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`user_id`),
-  UNIQUE INDEX `user_id_UNIQUE` (`user_id` ASC));
-  ALTER TABLE `users`.`roles`
-  CHANGE COLUMN `user_id` `email` VARCHAR(100) NOT NULL ;
 
 CREATE TABLE `posts`.`posts` (
   `post_id` INT NOT NULL AUTO_INCREMENT,

@@ -11,6 +11,18 @@ public class Post {
         this.postText = postText;
     }
 
+    public int getPostId() {
+        return postId;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public String getPostText() {
+        return postText;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

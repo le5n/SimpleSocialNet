@@ -1,8 +1,8 @@
 package sql;
 
-import exceptions.UserNotFoundException;
 import common.ConnectionPool;
 import dao.UserDao;
+import exceptions.UserNotFoundException;
 import security.StringEncryptUtil;
 import social.User;
 
@@ -10,7 +10,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class  SqlUserDao implements UserDao {
+public class SqlUserDao implements UserDao {
 
     private Collection<User> allUsers = new ArrayList<>();
 
@@ -20,7 +20,7 @@ public class  SqlUserDao implements UserDao {
     private final String GET_USER_BY_EMAIL = "SELECT * FROM users.users WHERE email=?";
     private final String ADD_USER = "INSERT INTO `users`.`users` (`name`, `lastname`, `email`, `password`, `username`) " +
             "VALUES (?, ?, ?, ?, ?);";
-    //private static final String SET_ROLE = "INSERT INTO `users`.`roles` (`email`, `role`) VALUES (?,?);";
+    private final String CHANGE_USERNAME = "UPDATE `users`.`users` SET `username`=? WHERE `email`=?;";
 
     public SqlUserDao() {
         if (connectionPool == null) {
@@ -130,17 +130,15 @@ public class  SqlUserDao implements UserDao {
         return user;
     }
 
-//    @Override
-//    public void setRole(String email, String role) {
-//        try (Connection connection = connectionPool.getConnection();
-//             PreparedStatement prepSt = connection.prepareStatement(SET_ROLE)) {
-//            prepSt.setString(1, email);
-//            prepSt.setString(2, role);
-//
-//            prepSt.execute();
-//        } catch (InterruptedException | SQLException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
+    @Override
+    public void changeUsername(String email, String newUsername) {
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement prepSt = connection.prepareStatement(CHANGE_USERNAME)) {
+            prepSt.setString(1, newUsername);
+            prepSt.setString(2, email);
+            prepSt.execute();
+        } catch (InterruptedException | SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
