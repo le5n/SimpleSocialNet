@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Collection;
 
-@WebServlet("/catalog/")
+@WebServlet("/page/")
 public class Catalog extends HttpServlet {
 
     private static final String POSTS = "posts";

@@ -31,7 +31,7 @@ public class Login extends HttpServlet {
                 session = request.getSession(true);
                 session.setAttribute(KEY, new Object());
 
-                forward("/page/userPage.html",request,response);
+                forward("/page/successLogin.html",request,response);
             } else {
                 forward("/getin/login.html", request,response);
             }

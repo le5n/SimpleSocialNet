@@ -29,10 +29,7 @@ public class Catalog extends TagSupport {
     public static String getPostList(Collection<Post> posts) throws IOException {
         StringBuilder out = new StringBuilder();
         for (Post post : posts)
-            out.append("<tr><td><a href=\"/buy/?id=")
-                    .append(post.getPostId())
-                    .append("\">")
-                    .append(post.getUserId())
+            out.append(post.getUserId())
                     .append("</a></td><td>")
                     .append(post.getPostText())
                     .append("</td></tr>");
