@@ -6,8 +6,8 @@
         version="2.1">
 
     <tlib-version>1.0</tlib-version>
-    <short-name>gunshop</short-name>
-    <uri>http://gunshop2.com</uri>
+    <short-name>postOut</short-name>
+    <uri>http://postOut.com</uri>
 
     <tag>
         <name>list</name>
@@ -21,7 +21,7 @@
     </tag>
 
     <function>
-        <name>getList</name>
+        <name>getUserPosts</name>
         <function-class>tags.Catalog</function-class>
         <function-signature>java.lang.String getPostList(java.util.Collection)</function-signature>
     </function>

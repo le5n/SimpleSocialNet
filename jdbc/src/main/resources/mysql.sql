@@ -23,15 +23,16 @@ ALTER TABLE `users`.`users`
 
 
 CREATE TABLE `posts`.`posts` (
-  `post_id` INT NOT NULL AUTO_INCREMENT,
+  `post_id` INT NOT NULL,
   `user_id` INT NOT NULL,
+  `post_date` VARCHAR(100) NOT NULL,
   `post_text` VARCHAR(140) NOT NULL,
   PRIMARY KEY (`post_id`),
   UNIQUE INDEX `post_id_UNIQUE` (`post_id` ASC));
+ALTER TABLE `posts`.`posts`
+  CHANGE COLUMN `post_id` `post_id` INT(11) NOT NULL AUTO_INCREMENT ;
 
-INSERT INTO `posts`.`posts` (`post_id`, `user_id`, `post_text`) VALUES ('1', '1', 'hello world');
-INSERT INTO `posts`.`posts` (`post_id`, `user_id`, `post_text`) VALUES ('2', '1', 'hello everyone');
-INSERT INTO `posts`.`posts` (`post_id`, `user_id`, `post_text`) VALUES ('3', '2', 'hey hey ');
+INSERT INTO `posts`.`posts` (`post_id`, `user_id`, `post_date`, `post_text`) VALUES ('1', '6', '05.05.05', 'hello world');
 
 
 

@@ -15,6 +15,7 @@ import java.io.IOException;
 @WebServlet(urlPatterns = "/Login")
 public class Login extends HttpServlet {
     private static final String KEY = "key";
+    private static final String USER_ID = "userId";
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         SqlUserDao sqlUserDao = new SqlUserDao();
@@ -30,6 +31,7 @@ public class Login extends HttpServlet {
 
                 session = request.getSession(true);
                 session.setAttribute(KEY, new Object());
+                session.setAttribute(USER_ID, user.getId());
 
                 forward("/page/successLogin.html",request,response);
             } else {

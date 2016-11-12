@@ -1,14 +1,16 @@
 package social;
-
+import java.time.LocalDateTime;
 public class Post {
     private final int postId;
     private final int userId;
     private final String postText;
+    private final String postDate;
 
-    public Post(int postId, int userId, String postText) {
+    public Post(int postId, int userId, String postText, String postDate) {
         this.postId = postId;
         this.userId = userId;
         this.postText = postText;
+        this.postDate = postDate;
     }
 
     public int getPostId() {
@@ -21,6 +23,10 @@ public class Post {
 
     public String getPostText() {
         return postText;
+    }
+
+    public String getPostDate() {
+        return postDate;
     }
 
     @Override

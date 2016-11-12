@@ -5,16 +5,22 @@ import dao.PostDao;
 import social.Post;
 
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collection;
 
 public class SqlPostDao implements PostDao {
+    private static final String ADD_POST = "INSERT INTO `posts`.`posts` (`user_id`, `post_date`, `post_text`) VALUES (?,?,?);";
     private static ConnectionPool connectionPool;
     private Collection<Post> allPosts = new ArrayList<>();
 
     private final String GET_ALL_POSTS = "SELECT * FROM posts.posts;";
     private final String GET_BY_POST_ID = "SELECT * FROM posts.posts WHERE post_id=?";
     private final String GET_POSTS_BY_USER_ID = "SELECT * FROM posts.posts WHERE user_id=?";
+
 
     public SqlPostDao() {
         if (connectionPool == null) {
@@ -33,11 +39,11 @@ public class SqlPostDao implements PostDao {
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(GET_ALL_POSTS)) {
             while (resultSet.next()) {
-                allPosts.add(
-                        new Post(
-                                resultSet.getInt("user_id"),
+                allPosts.add(new Post(
                                 resultSet.getInt("post_id"),
-                                resultSet.getString("post_text")
+                                resultSet.getInt("user_id"),
+                                resultSet.getString("post_text"),
+                                resultSet.getString("post_date")
                         )
                 );
             }
@@ -60,7 +66,8 @@ public class SqlPostDao implements PostDao {
                 post = new Post(
                         resultSet.getInt("post_id"),
                         resultSet.getInt("user_id"),
-                        resultSet.getString("post_text")
+                        resultSet.getString("post_text"),
+                        resultSet.getString("post_date")
                 );
             }
             resultSet.close();
@@ -84,7 +91,8 @@ public class SqlPostDao implements PostDao {
                 UserPosts.add(new Post(
                         resultSet.getInt("post_id"),
                         resultSet.getInt("user_id"),
-                        resultSet.getString("post_text")
+                        resultSet.getString("post_text"),
+                        resultSet.getString("post_date")
                 ));
             }
 
@@ -93,6 +101,24 @@ public class SqlPostDao implements PostDao {
             e.printStackTrace();
         }
         return UserPosts;
+    }
+
+    @Override
+    public void addPost(String postText, int userId) {
+        try(Connection connection = connectionPool.getConnection();
+            PreparedStatement prepSt = connection.prepareStatement(ADD_POST)) {
+            LocalDateTime localDate = LocalDateTime.of(LocalDate.now(), LocalTime.now());
+
+
+            prepSt.setInt(1, userId);
+            prepSt.setString(2,localDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy : hh - mm")));
+            prepSt.setString(3, postText);
+
+            prepSt.execute();
+
+        }catch (InterruptedException | SQLException e) {
+            e.printStackTrace();
+        }
     }
 
 }

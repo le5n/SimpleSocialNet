@@ -7,20 +7,32 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="/WEB-INF/gunshop.tld" prefix="gunshop"%>
+<%@ taglib uri="/WEB-INF/postOut.tld" prefix="postOut"%>
 <html>
 <head>
     <title></title>
 </head>
 <body>
-<table>
+<div>
+    place for photo
+</div>
+<div class="information" align="middle">
+My posts: <br/>
+<table border="1">
     <tr>
-        <th>Name</th>
-        <th>Caliber</th>
+        <th>date</th>
+        <th>text</th>
     </tr>
 
-    ${gunshop:getList(requestScope["posts"])}
+    ${postOut:getUserPosts(requestScope["posts"])}
 
-</table>
+</table> <br/>
+    </div>
+<div align="left">
+    <form action="/AddPostServlet">
+        <textarea name="newPost" rows="4" cols="55" placeholder="enter the post"></textarea><br/><br/>
+        <button type="submit">Post</button>
+        </form>
+</div>
 </body>
 </html>
