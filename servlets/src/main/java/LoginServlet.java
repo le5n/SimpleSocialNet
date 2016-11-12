@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet(urlPatterns = "/Login")
-public class Login extends HttpServlet {
+public class LoginServlet extends HttpServlet {
     private static final String KEY = "key";
     private static final String USER_ID = "userId";
 
@@ -25,21 +25,25 @@ public class Login extends HttpServlet {
         String typedPassword = request.getParameter("password");
         String hash = StringEncryptUtil.encrypt(typedPassword);
 
-        try {
-            User user = sqlUserDao.getUserByEmail(typedEmail);
-            if (user.getPassword().equals(hash)) {
+        if (typedEmail.equals("") && typedPassword.equals("")) {
+            forward("/getin/error.html", request, response);
+        } else {
+            try {
+                User user = sqlUserDao.getUserByEmail(typedEmail);
+                if (user.getPassword().equals(hash)) {
 
-                session = request.getSession(true);
-                session.setAttribute(KEY, new Object());
-                session.setAttribute(USER_ID, user.getId());
+                    session = request.getSession(true);
+                    session.setAttribute(KEY, new Object());
+                    session.setAttribute(USER_ID, user.getId());
 
-                forward("/page/successLogin.html",request,response);
-            } else {
-                forward("/getin/login.html", request,response);
+                    forward("/page/successLogin.html", request, response);
+                } else {
+                    forward("/getin/error.html", request, response);
+                }
+            } catch (UserNotFoundException e) {
+                e.printStackTrace();
+                forward("/getin/login.html", request, response);
             }
-        } catch (UserNotFoundException e) {
-            e.printStackTrace();
-            forward("/getin/login.html", request,response);
         }
     }
 

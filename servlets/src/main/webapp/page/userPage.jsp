@@ -15,6 +15,9 @@
 <body>
 <div>
     place for photo
+    <form action="/logout" method="POST">
+        <button type="submit">logout</button>
+    </form>
 </div>
 <div class="information" align="middle">
 My posts: <br/>

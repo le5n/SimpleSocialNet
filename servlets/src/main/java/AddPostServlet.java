@@ -3,6 +3,7 @@ import dao.UserDao;
 import sql.SqlPostDao;
 import sql.SqlUserDao;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,7 +26,10 @@ public class AddPostServlet extends HttpServlet {
         HttpSession session = request.getSession();
         int userId = (int)session.getAttribute(USER_ID);
         System.out.println(userId);
-
         postDao.addPost(postText,userId);
+
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/page/");
+        dispatcher.forward(request, response);
+
     }
 }
