@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.Collection;
 
 @WebServlet("/page/")
-public class Catalog extends HttpServlet {
+public class PostServlet extends HttpServlet {
 
     private static final String POSTS = "posts";
     private static final String USER_ID = "userId";

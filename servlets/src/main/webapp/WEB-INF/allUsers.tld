@@ -6,24 +6,24 @@
         version="2.1">
 
     <tlib-version>1.0</tlib-version>
-    <short-name>postOut</short-name>
-    <uri>http://postOut.com</uri>
+    <short-name>users</short-name>
+    <uri>http://users.com</uri>
 
     <tag>
-        <name>list</name>
-        <tag-class>tags.Posts</tag-class>
+        <name>users</name>
+        <tag-class>tags.AllUsers</tag-class>
         <body-content>empty</body-content>
         <attribute>
-            <name>posts</name>
+            <name>users</name>
             <required>true</required>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
     </tag>
 
     <function>
-        <name>getUserPosts</name>
-        <function-class>tags.Posts</function-class>
-        <function-signature>java.lang.String getPostList(java.util.Collection)</function-signature>
+        <name>getAllUsers</name>
+        <function-class>tags.AllUsers</function-class>
+        <function-signature>java.lang.String getAllUsers(java.util.Collection)</function-signature>
     </function>
 
 </taglib>

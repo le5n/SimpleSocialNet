@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Upload photo</title>
+    <link rel="stylesheet" href="../_styles/style.css">
 </head>
 <body>
-<form method="POST" enctype="multipart/form-data" action="fup.cgi">
-    File to upload: <input type="file" name="upfile"><br/>
+<form method="POST" enctype="multipart/form-data">
+    <label>File to upload:</label>
+    <input type="file" name="upfile"><br/>
     <br/>
     <input type="submit" value="Press"> to upload the file!
 </form>

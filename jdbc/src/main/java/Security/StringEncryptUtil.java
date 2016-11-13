@@ -3,9 +3,9 @@ package security;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public interface StringEncryptUtil{
+public interface StringEncryptUtil {
 
-    static String encrypt(String s)  {
+    static String encrypt(String s) {
         MessageDigest messageDigest = null;
         try {
             messageDigest = MessageDigest.getInstance("MD5");

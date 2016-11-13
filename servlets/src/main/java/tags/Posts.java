@@ -7,7 +7,7 @@ import javax.servlet.jsp.tagext.TagSupport;
 import java.io.IOException;
 import java.util.Collection;
 
-public class Catalog extends TagSupport {
+public class Posts extends TagSupport {
 
     private Collection<Post> posts;
 

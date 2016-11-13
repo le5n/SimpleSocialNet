@@ -13,14 +13,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class SqlPostDao implements PostDao {
-    private static final String ADD_POST = "INSERT INTO `posts`.`posts` (`user_id`, `post_date`, `post_text`) VALUES (?,?,?);";
+
     private static ConnectionPool connectionPool;
     private Collection<Post> allPosts = new ArrayList<>();
 
     private final String GET_ALL_POSTS = "SELECT * FROM posts.posts;";
     private final String GET_BY_POST_ID = "SELECT * FROM posts.posts WHERE post_id=?";
     private final String GET_POSTS_BY_USER_ID = "SELECT * FROM posts.posts WHERE user_id=?";
-
+    private static final String ADD_POST = "INSERT INTO `posts`.`posts` (`user_id`, `post_date`, `post_text`) VALUES (?,?,?);";
 
     public SqlPostDao() {
         if (connectionPool == null) {
@@ -47,6 +47,7 @@ public class SqlPostDao implements PostDao {
                         )
                 );
             }
+            resultSet.close();
         } catch (SQLException | InterruptedException e) {
             e.printStackTrace();
         }
@@ -61,6 +62,7 @@ public class SqlPostDao implements PostDao {
              PreparedStatement prepStPostData = connection.prepareStatement(GET_BY_POST_ID)) {
 
             prepStPostData.setInt(1, postId);
+            // TODO: 13.11.2016 try
             ResultSet resultSet = prepStPostData.executeQuery();
             while (resultSet.next()) {
                 post = new Post(
@@ -96,7 +98,6 @@ public class SqlPostDao implements PostDao {
                 ));
             }
 
-            resultSet.close();
         } catch (InterruptedException | SQLException e) {
             e.printStackTrace();
         }
