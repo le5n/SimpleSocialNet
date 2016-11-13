@@ -19,8 +19,7 @@
     </tr>
 
     ${gunshop:getList(requestScope["posts"])}
-
 </table>
-
+<a href="/GetUserServlet/?userHref="></a>
 </body>
 </html>
