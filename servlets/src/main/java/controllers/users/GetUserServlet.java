@@ -31,7 +31,7 @@ public class GetUserServlet extends HttpServlet {
 
         request.setAttribute(POSTS, posts);
 
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/page/otherUserPage.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/page/otherUserPage.jsp/");
         requestDispatcher.forward(request, response);
     }
 }

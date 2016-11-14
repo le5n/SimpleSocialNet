@@ -34,5 +34,8 @@ ALTER TABLE `posts`.`posts`
 
 INSERT INTO `posts`.`posts` (`post_id`, `user_id`, `post_date`, `post_text`) VALUES ('1', '6', '05.05.05', 'hello world');
 
-
+CREATE TABLE `users`.`subscribes` (
+  `user_id` INT NOT NULL,
+  `subscription` INT NOT NULL,
+  PRIMARY KEY (`user_id`));
 

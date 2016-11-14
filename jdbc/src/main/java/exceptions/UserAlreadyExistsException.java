@@ -1,4 +1,4 @@
 package exceptions;
 
-public class UserAlreadyExistsException {
+public class UserAlreadyExistsException extends Exception {
 }
