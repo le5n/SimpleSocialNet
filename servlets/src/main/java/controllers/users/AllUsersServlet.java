@@ -1,3 +1,5 @@
+package controllers.users;
+
 import dao.UserDao;
 import sql.SqlUserDao;
 

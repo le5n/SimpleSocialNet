@@ -1,3 +1,5 @@
+package controllers.users;
+
 import social.User;
 import sql.SqlUserDao;
 

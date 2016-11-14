@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="../_styles/style.css">
 </head>
 <body>
+
 <div align="middle">
     <span>My posts:</span> <br/>
     <table border="1">

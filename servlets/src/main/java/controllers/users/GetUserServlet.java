@@ -1,3 +1,5 @@
+package controllers.users;
+
 import dao.PostDao;
 import social.Post;
 import sql.SqlPostDao;

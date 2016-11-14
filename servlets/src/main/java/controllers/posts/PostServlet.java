@@ -1,3 +1,5 @@
+package controllers.posts;
+
 import dao.PostDao;
 import social.Post;
 import sql.SqlPostDao;

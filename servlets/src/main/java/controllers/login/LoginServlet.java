@@ -1,3 +1,4 @@
+package controllers.login;
 
 import exceptions.UserNotFoundException;
 import security.StringEncryptUtil;
