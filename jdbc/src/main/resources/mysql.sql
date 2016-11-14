@@ -39,3 +39,9 @@ CREATE TABLE `users`.`subscribes` (
   `subscription` INT NOT NULL,
   PRIMARY KEY (`user_id`));
 
+ALTER TABLE `users`.`subscribes`
+  ADD COLUMN `sub_id` INT NOT NULL AUTO_INCREMENT FIRST,
+  DROP PRIMARY KEY,
+  ADD PRIMARY KEY (`sub_id`);
+
+

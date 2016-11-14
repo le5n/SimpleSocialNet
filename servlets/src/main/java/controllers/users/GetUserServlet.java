@@ -17,6 +17,7 @@ import java.util.Collection;
 @WebServlet("/GetUserServlet/")
 public class GetUserServlet extends HttpServlet {
     private static final String POSTS = "anotherPosts";
+    private static final String USER_ID = "userID";
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -24,14 +25,15 @@ public class GetUserServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PostDao postDao = new SqlPostDao();
-        HttpSession session = request.getSession();
 
         int userId = Integer.parseInt(request.getParameter("userHref"));
+
         Collection<Post> posts = postDao.getPostsByUserId(userId);
 
         request.setAttribute(POSTS, posts);
+        request.setAttribute(USER_ID,userId);
 
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/page/otherUserPage.jsp/");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/page/otherUserPage.jsp");
         requestDispatcher.forward(request, response);
     }
 }

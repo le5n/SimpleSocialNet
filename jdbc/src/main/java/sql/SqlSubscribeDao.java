@@ -1,16 +1,15 @@
 package sql;
 
 import common.ConnectionPool;
-import dao.SubscribtionDao;
+import dao.SubscriptionDao;
 import social.Post;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
 
-public class SqlSubscribeDao implements SubscribtionDao{
+public class SqlSubscribeDao implements SubscriptionDao {
     private ConnectionPool connectionPool;
     private final String ADD_SUB = "INSERT INTO `users`.`subscribes` (`user_id`, `subscription`) VALUES (?, ?);";
 
@@ -24,16 +23,17 @@ public class SqlSubscribeDao implements SubscribtionDao{
             }
         }
     }
+
     @Override
     public void addSubscription(int userId, int subId) {
-        try(Connection connection = connectionPool.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement(ADD_SUB)){
-            preparedStatement.setInt(1,userId);
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(ADD_SUB)) {
+            preparedStatement.setInt(1, userId);
             preparedStatement.setInt(2, subId);
 
             preparedStatement.execute();
 
-        }catch (InterruptedException | SQLException e){
+        } catch (InterruptedException | SQLException e) {
             e.printStackTrace();
         }
     }

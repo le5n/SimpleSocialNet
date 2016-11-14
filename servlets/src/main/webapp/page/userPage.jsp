@@ -16,7 +16,7 @@
     </form>
 </div>
 <div align="middle">
-<span>My posts:</span> <br/>
+<span>My posts!:</span> <br/>
 <table border="1">
     <tr>
         <th>date</th>
