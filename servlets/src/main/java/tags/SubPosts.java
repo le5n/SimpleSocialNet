@@ -1,6 +1,10 @@
 package tags;
 
+import dao.UserDao;
+import exceptions.UserNotFoundException;
 import social.Post;
+import social.User;
+import sql.SqlUserDao;
 import tags.sort.ComparePostsById;
 
 import javax.servlet.jsp.JspException;
@@ -8,9 +12,10 @@ import javax.servlet.jsp.tagext.TagSupport;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
-public class Posts extends TagSupport {
+public class SubPosts extends TagSupport {
 
     private Collection<Post> posts;
 
@@ -22,25 +27,30 @@ public class Posts extends TagSupport {
     public int doStartTag() throws JspException {
         try {
             pageContext.getOut().print(getPostList(posts));
-        } catch (IOException e) {
+        } catch (IOException | UserNotFoundException e) {
             e.printStackTrace();
         }
 
         return SKIP_BODY;
     }
 
-    public static String getPostList(Collection<Post> posts) throws IOException {
+    public static String getPostList(Collection<Post> posts) throws IOException, UserNotFoundException {
+        UserDao userDao = new SqlUserDao();
+        StringBuilder out = new StringBuilder();
+
         List<Post> listPosts = (List) posts;
         Collections.sort(listPosts, new ComparePostsById());
 
-        System.out.println(listPosts);
-        StringBuilder out = new StringBuilder();
-        for (Post post : listPosts)
+        for (Post post : listPosts) {
+            User user = userDao.getUserById(post.getUserId());
             out.append("<tr><td>")
+                    .append(user.getUserName())
+                    .append("</td><td>")
                     .append(post.getPostDate())
-                    .append("</a></td><td>")
+                    .append("</td><td>")
                     .append(post.getPostText())
                     .append("</td></tr>");
+        }
 
         return out.toString();
     }

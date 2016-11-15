@@ -6,24 +6,24 @@
         version="2.1">
 
     <tlib-version>1.0</tlib-version>
-    <short-name>buttonID</short-name>
-    <uri>http://buttonID<.com</uri>
+    <short-name>followers</short-name>
+    <uri>http://followers.com</uri>
 
     <tag>
         <name>list</name>
-        <tag-class>tags.ButtonWithId</tag-class>
+        <tag-class>tags.Followers</tag-class>
         <body-content>empty</body-content>
         <attribute>
-            <name>buttonID</name>
+            <name>followers</name>
             <required>true</required>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
     </tag>
 
     <function>
-        <name>getUserId</name>
-        <function-class>tags.ButtonWithId</function-class>
-        <function-signature>java.lang.String getUserId(java.lang.String)</function-signature>
+        <name>countFollowers</name>
+        <function-class>tags.Followers</function-class>
+        <function-signature>java.lang.String countFollowers(java.util.Collection)</function-signature>
     </function>
 
 </taglib>

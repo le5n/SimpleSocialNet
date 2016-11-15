@@ -6,24 +6,24 @@
         version="2.1">
 
     <tlib-version>1.0</tlib-version>
-    <short-name>buttonID</short-name>
-    <uri>http://buttonID<.com</uri>
+    <short-name>postOut</short-name>
+    <uri>http://postOut.com</uri>
 
     <tag>
         <name>list</name>
-        <tag-class>tags.ButtonWithId</tag-class>
+        <tag-class>tags.SubPosts</tag-class>
         <body-content>empty</body-content>
         <attribute>
-            <name>buttonID</name>
+            <name>posts</name>
             <required>true</required>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
     </tag>
 
     <function>
-        <name>getUserId</name>
-        <function-class>tags.ButtonWithId</function-class>
-        <function-signature>java.lang.String getUserId(java.lang.String)</function-signature>
+        <name>getUserPosts</name>
+        <function-class>tags.SubPosts</function-class>
+        <function-signature>java.lang.String getPostList(java.util.Collection)</function-signature>
     </function>
 
 </taglib>

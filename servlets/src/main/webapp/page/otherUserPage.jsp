@@ -4,18 +4,12 @@
 <html>
 <head>
     <title>another user page</title>
-    <style>
-        input{
-            display:none;
-        }
-    </style>
     <%--<link rel="stylesheet" href="../_styles/style.css">--%>
 </head>
 <body>
-
 <div align="middle">
     <form action="/SubscribeServlet">
-        <button type="submit" name="button" value="${userID:getUserId(requestScope["userID"])}">subscribe</button>
+        <button type="submit" value="${userID:getUserId(requestScope["userID"])}" name="button"> subscribe </button>
     </form>
     <span>user posts:</span> <br/>
     <table border="1">
