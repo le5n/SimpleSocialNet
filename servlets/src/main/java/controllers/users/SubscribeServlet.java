@@ -23,7 +23,7 @@ public class SubscribeServlet extends HttpServlet {
 
         SubscriptionDao subscriptionDao = new SqlSubscribeDao();
 
-        subscriptionDao.addSubscription(userId, pageId);
+        subscriptionDao.unsubscribe(userId, pageId);
 
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/GetUserServlet/?userHref=" + pageId);
         requestDispatcher.forward(request, response);

@@ -3,7 +3,6 @@ package sql;
 import common.ConnectionPool;
 import dao.PostDao;
 import dao.SubscriptionDao;
-import javafx.geometry.Pos;
 import social.Post;
 
 import java.sql.Connection;
@@ -17,7 +16,9 @@ public class SqlSubscribeDao implements SubscriptionDao {
     private ConnectionPool connectionPool;
     private Collection<Integer> userSubs;
     private final String ADD_SUB = "INSERT INTO `users`.`subscribes` (`user_id`, `subscription`) VALUES (?, ?);";
+    private final String FIND_SUB_ID = "SELECT * FROM users.subscribes WHERE user_id=? AND subscription=?;";
     private final String GET_IDS = "SELECT * FROM `users`.`subscribes` WHERE user_id=?;";
+    private final String REMOVE_SUB = "DELETE FROM `users`.`subscribes` WHERE `sub_id`=?;";
 
     public SqlSubscribeDao() {
         if (connectionPool == null) {
@@ -27,6 +28,29 @@ public class SqlSubscribeDao implements SubscriptionDao {
                             "D:\\\\Программы\\\\SimpleSocialNet\\\\jdbc\\\\src\\\\main\\\\resources\\\\userData.properties");
                 }
             }
+        }
+    }
+
+    @Override
+    public void unsubscribe(int userId, int subId) {
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(FIND_SUB_ID);
+             PreparedStatement delete = connection.prepareStatement(REMOVE_SUB)) {
+            preparedStatement.setInt(1, userId);
+            preparedStatement.setInt(2, subId);
+            int sub_id = 0;
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    sub_id = resultSet.getInt(1);
+                }
+            }
+            delete.setInt(1, sub_id);
+            delete.execute();
+
+
+        } catch (InterruptedException | SQLException e) {
+            e.printStackTrace();
         }
     }
 
@@ -69,7 +93,7 @@ public class SqlSubscribeDao implements SubscriptionDao {
         userSubs = getSubIds(userId);
 
         Collection<Post> subPosts = new LinkedList<>();
-        for(Integer sub:userSubs){
+        for (Integer sub : userSubs) {
             Collection<Post> temp = sqlPostDao.getPostsByUserId(sub);
             subPosts.addAll(temp);
         }
