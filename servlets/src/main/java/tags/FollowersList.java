@@ -36,7 +36,7 @@ public class FollowersList extends TagSupport {
 
         for (Integer followerId : followers) {
             User user = userDao.getUserById(followerId);
-            out.append("<a href=\"/GetUserServlet/?userHref=").append(user.getId()).append("\">").append(user.getUserName()).append("</a>").append("<br/>");
+            out.append("<a href=\"/GetUserServlet/?userHref=").append(user.getId()).append("&sub=true\">").append(user.getUserName()).append("</a>").append("<br/>");
         }
 
         return out.toString();

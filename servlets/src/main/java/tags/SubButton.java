@@ -25,8 +25,10 @@ public class SubButton extends TagSupport {
     public static String showButton(boolean isSubscribed) throws IOException {
         if (!isSubscribed)
             return "subscribe";
-        else
+        else if (isSubscribed)
             return "unsubscribe";
+        else
+            return "unknown";
 
     }
 }

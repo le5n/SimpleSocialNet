@@ -36,7 +36,6 @@ public class PostServlet extends HttpServlet {
         Collection<Post> posts = postDao.getPostsByUserId(userId);
         Collection<Post> subPosts = subscriptionDao.getSubPosts(userId);
         Collection<Integer> followers = subscriptionDao.getSubIds(userId);
-        System.out.println(subPosts);
 
         req.setAttribute(POSTS, posts);
         req.setAttribute(SUB_POSTS, subPosts);

@@ -18,20 +18,27 @@ import java.util.Collection;
 public class GetUserServlet extends HttpServlet {
     private static final String POSTS = "anotherPosts";
     private static final String USER_ID = "userID";
-
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
+    private static final String SUB_BUTTON = "subButton";
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PostDao postDao = new SqlPostDao();
 
         int userId = Integer.parseInt(request.getParameter("userHref"));
-
+        System.out.println("getUserServlet can type smt woah");
         Collection<Post> posts = postDao.getPostsByUserId(userId);
+        if(request.getParameter("sub").equals("true")){
+            request.setAttribute(SUB_BUTTON, true);
+            System.out.println("sub is not null");
+        }
+        else{
+            request.setAttribute(SUB_BUTTON, false);
+            System.out.println("sub is null");
+        }
 
         request.setAttribute(POSTS, posts);
         request.setAttribute(USER_ID,userId);
+
+
 
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/page/otherUserPage.jsp");
         requestDispatcher.forward(request, response);
