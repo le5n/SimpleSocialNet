@@ -21,6 +21,16 @@ public class Post {
         return userId;
     }
 
+    @Override
+    public String toString() {
+        return "Post{" +
+                "postId=" + postId +
+                ", userId=" + userId +
+                ", postText='" + postText + '\'' +
+                ", postDate='" + postDate + '\'' +
+                '}';
+    }
+
     public String getPostText() {
         return postText;
     }

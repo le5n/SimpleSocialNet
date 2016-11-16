@@ -5,7 +5,6 @@
     <title>all users</title>
 </head>
 <body>
-
     ${allUsers:getAllUsers(requestScope["users"])}
 </body>
 </html>

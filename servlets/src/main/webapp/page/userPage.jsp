@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../_styles/style.css">
 </head>
 <body>
-<span>subscibes: ${countFollowers:countFollowers(requestScope["followers"])}</span>
+<span>subscibes: <a href="/followersList"> ${countFollowers:countFollowers(requestScope["followers"])}</a></span>
 <div>
     place for photo
     <form action="/logout" method="POST">
@@ -25,7 +25,7 @@
     </form>
 </div>
 <div align="left">
-    <span>My posts</span> <br/>
+    <span>My followers</span> <br/>
     <table border="1">
         <tr>
             <th>date</th>
@@ -44,7 +44,8 @@
         <th>date</th>
         <th>text</th>
     </tr>
-    ${subPostOut:getUserPosts(requestScope["subPosts"])}
+    ${subPostOut:getPostList(requestScope["subPosts"])}
+
     </table> <br/>
 
 </div>

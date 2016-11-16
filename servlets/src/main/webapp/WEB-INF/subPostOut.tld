@@ -14,14 +14,14 @@
         <tag-class>tags.SubPosts</tag-class>
         <body-content>empty</body-content>
         <attribute>
-            <name>posts</name>
+            <name>followers</name>
             <required>true</required>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
     </tag>
 
     <function>
-        <name>getUserPosts</name>
+        <name>getPostList</name>
         <function-class>tags.SubPosts</function-class>
         <function-signature>java.lang.String getPostList(java.util.Collection)</function-signature>
     </function>

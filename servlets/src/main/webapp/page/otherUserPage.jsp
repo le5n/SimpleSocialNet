@@ -11,7 +11,7 @@
     <form action="/SubscribeServlet">
         <button type="submit" value="${userID:getUserId(requestScope["userID"])}" name="button"> subscribe </button>
     </form>
-    <span>user posts:</span> <br/>
+    <span>user followers:</span> <br/>
     <table border="1">
         <tr>
             <th>date</th>

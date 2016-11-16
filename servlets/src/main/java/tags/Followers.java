@@ -11,16 +11,16 @@ import java.util.Collection;
 
 public class Followers extends TagSupport {
 
-    private Collection<Post> posts;
+    private Collection<Integer> followers;
 
-    public void setPosts(Collection<Post> posts) {
-        this.posts = posts;
+    public void setFollowers(Collection<Integer> followers) {
+        this.followers = followers;
     }
 
     @Override
     public int doStartTag() throws JspException {
         try {
-            pageContext.getOut().print(countFollowers(posts));
+            pageContext.getOut().print(countFollowers(followers));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -28,9 +28,7 @@ public class Followers extends TagSupport {
         return SKIP_BODY;
     }
 
-    public static String countFollowers(Collection<Post> subPosts) throws IOException {
-        SubscriptionDao subscriptionDao = new SqlSubscribeDao();
-
+    public static String countFollowers(Collection<Integer> subPosts) throws IOException {
         return String.valueOf(subPosts.size());
     }
 }

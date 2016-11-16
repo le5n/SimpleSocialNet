@@ -52,7 +52,7 @@ public class SqlSubscribeDao implements SubscriptionDao {
             preparedStatement.setInt(1, userId);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
-                    userSubs.add(resultSet.getInt(2));
+                    userSubs.add(resultSet.getInt(3));
                 }
             }
             return userSubs;

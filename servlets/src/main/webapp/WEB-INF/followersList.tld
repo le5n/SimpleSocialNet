@@ -6,12 +6,12 @@
         version="2.1">
 
     <tlib-version>1.0</tlib-version>
-    <short-name>postOut</short-name>
-    <uri>http://postOut.com</uri>
+    <short-name>followers</short-name>
+    <uri>http://followers.com</uri>
 
     <tag>
         <name>list</name>
-        <tag-class>tags.Posts</tag-class>
+        <tag-class>tags.FollowersList</tag-class>
         <body-content>empty</body-content>
         <attribute>
             <name>followers</name>
@@ -21,9 +21,9 @@
     </tag>
 
     <function>
-        <name>getUserPosts</name>
-        <function-class>tags.Posts</function-class>
-        <function-signature>java.lang.String getPostList(java.util.Collection)</function-signature>
+        <name>getFollowersList</name>
+        <function-class>tags.FollowersList</function-class>
+        <function-signature>java.lang.String getFollowers(java.util.Collection)</function-signature>
     </function>
 
 </taglib>
