@@ -1,8 +1,10 @@
 package controllers.users;
 
 import dao.PostDao;
+import dao.SubscriptionDao;
 import social.Post;
 import sql.SqlPostDao;
+import sql.SqlSubscribeDao;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -19,21 +21,27 @@ public class GetUserServlet extends HttpServlet {
     private static final String POSTS = "anotherPosts";
     private static final String USER_ID = "userID";
     private static final String SUB_BUTTON = "subButton";
+    private static final String CURRENT_USER_ID = "userId";
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PostDao postDao = new SqlPostDao();
+        SubscriptionDao subscriptionDao = new SqlSubscribeDao();
+        HttpSession session = request.getSession();
+        int currentUserId = (int) session.getAttribute("userId");
 
         int userId = Integer.parseInt(request.getParameter("userHref"));
-        System.out.println("getUserServlet can type smt woah");
+
         Collection<Post> posts = postDao.getPostsByUserId(userId);
-        if(request.getParameter("sub").equals("true")){
+
+        Collection<Integer> subscribes = subscriptionDao.getSubIds(currentUserId);
+
+        if(subscribes.contains(userId)){
             request.setAttribute(SUB_BUTTON, true);
-            System.out.println("sub is not null");
         }
-        else{
+        else {
             request.setAttribute(SUB_BUTTON, false);
-            System.out.println("sub is null");
         }
+
 
         request.setAttribute(POSTS, posts);
         request.setAttribute(USER_ID,userId);
