@@ -23,7 +23,7 @@ public class SubscribeServlet extends HttpServlet {
         String isSubscribed = (String) request.getAttribute("subButton");
         System.out.println(isSubscribed);
         int userId = (int) session.getAttribute(USER_ID);
-        int pageId = (int) request.getAttribute("button");
+        int pageId = (int) request.getAttribute("idButton");
 
 
         if (isSubscribed.equals("subscribe")) {
