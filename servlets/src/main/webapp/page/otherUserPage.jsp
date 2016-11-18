@@ -10,8 +10,8 @@
 <body>
 <div align="middle">
     <form action="/SubscribeServlet">
-        <button class="checkUserId"  value="${userID:getUserId(requestScope["userID"])}" id="idButton">${userID:getUserId(requestScope["userID"])}</button>
-        <button type="submit" value="${subButton:getSubButton(requestScope["subButton"])}" id="subButton"> ${subButton:getSubButton(requestScope["subButton"])} </button>
+        <input type="hidden" value="${userID:getUserId(requestScope["userID"])}" name="idButton">${userID:getUserId(requestScope["userID"])}
+        <input type="submit" value="${subButton:getSubButton(requestScope["subButton"])}" name="subButton"> ${subButton:getSubButton(requestScope["subButton"])}
     </form>
     <span>user followers:</span> <br/>
     <table border="1">

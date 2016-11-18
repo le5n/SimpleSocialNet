@@ -20,10 +20,10 @@ public class SubscribeServlet extends HttpServlet {
         SubscriptionDao subscriptionDao = new SqlSubscribeDao();
 
         HttpSession session = request.getSession();
-        String isSubscribed = (String) request.getAttribute("subButton");
+        String isSubscribed = request.getParameter("subButton");
         System.out.println(isSubscribed);
         int userId = (int) session.getAttribute(USER_ID);
-        int pageId = (int) request.getAttribute("idButton");
+        int pageId = Integer.parseInt(request.getParameter("idButton"));
 
 
         if (isSubscribed.equals("subscribe")) {

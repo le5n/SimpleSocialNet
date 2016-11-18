@@ -24,10 +24,8 @@ public class AddPostServlet extends HttpServlet {
         PostDao postDao = new SqlPostDao();
 
         String postText = request.getParameter("newPost");
-        System.out.println(postText);
         HttpSession session = request.getSession();
         int userId = (int)session.getAttribute(USER_ID);
-        System.out.println(userId);
         postDao.addPost(postText,userId);
 
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/page/");
