@@ -17,13 +17,20 @@ public class SubscribeServlet extends HttpServlet {
     private static final String USER_ID = "userId";
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        int userId = (int) session.getAttribute(USER_ID);
-        int pageId = Integer.parseInt(request.getParameter("button"));
-
         SubscriptionDao subscriptionDao = new SqlSubscribeDao();
 
-        subscriptionDao.unsubscribe(userId, pageId);
+        HttpSession session = request.getSession();
+        String isSubscribed = (String) request.getAttribute("subButton");
+        System.out.println(isSubscribed);
+        int userId = (int) session.getAttribute(USER_ID);
+        int pageId = (int) request.getAttribute("button");
+
+
+        if (isSubscribed.equals("subscribe")) {
+            subscriptionDao.addSubscription(userId,pageId);
+        } else {
+            subscriptionDao.unsubscribe(userId, pageId);
+        }
 
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/GetUserServlet/?userHref=" + pageId);
         requestDispatcher.forward(request, response);

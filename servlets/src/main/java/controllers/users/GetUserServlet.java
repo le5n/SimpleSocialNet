@@ -27,7 +27,7 @@ public class GetUserServlet extends HttpServlet {
         PostDao postDao = new SqlPostDao();
         SubscriptionDao subscriptionDao = new SqlSubscribeDao();
         HttpSession session = request.getSession();
-        int currentUserId = (int) session.getAttribute("userId");
+        int currentUserId = (int) session.getAttribute(CURRENT_USER_ID);
 
         int userId = Integer.parseInt(request.getParameter("userHref"));
 
@@ -42,11 +42,8 @@ public class GetUserServlet extends HttpServlet {
             request.setAttribute(SUB_BUTTON, false);
         }
 
-
         request.setAttribute(POSTS, posts);
         request.setAttribute(USER_ID,userId);
-
-
 
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/page/otherUserPage.jsp");
         requestDispatcher.forward(request, response);
