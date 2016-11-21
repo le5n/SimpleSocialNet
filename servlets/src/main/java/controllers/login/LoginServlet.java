@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-
+//// TODO: 21.11.2016  вылетает если ввести непоняно какой логин и пароль (null pointer exception)
 @WebServlet(urlPatterns = "/Login")
 public class LoginServlet extends HttpServlet {
     private static final String KEY = "key";

@@ -33,7 +33,6 @@ public class Posts extends TagSupport {
         List<Post> listPosts = (List) posts;
         Collections.sort(listPosts, new ComparePostsById());
 
-        System.out.println(listPosts);
         StringBuilder out = new StringBuilder();
         for (Post post : listPosts)
             out.append("<tr><td>")
