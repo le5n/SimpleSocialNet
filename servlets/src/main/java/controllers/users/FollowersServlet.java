@@ -1,9 +1,6 @@
 package controllers.users;
 
-import dao.PostDao;
 import dao.SubscriptionDao;
-import social.Post;
-import sql.SqlPostDao;
 import sql.SqlSubscribeDao;
 
 import javax.servlet.RequestDispatcher;
@@ -19,7 +16,7 @@ import java.util.Collection;
 @WebServlet("/followersList")
 public class FollowersServlet extends HttpServlet{
     private static final String USER_ID = "userId";
-    private static final String FOLLOWERS = "followers";
+    private static final String SUBSCRIBES = "subscribes";
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -27,9 +24,9 @@ public class FollowersServlet extends HttpServlet{
         HttpSession session = req.getSession();
 
         int userId = (int) session.getAttribute(USER_ID);
-        Collection<Integer> followers = subscriptionDao.getSubIds(userId);
+        Collection<Integer> subIds = subscriptionDao.getSubIds(userId);
 
-        req.setAttribute(FOLLOWERS, followers);
+        req.setAttribute(SUBSCRIBES, subIds);
 
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("/page/followersList.jsp");
         requestDispatcher.forward(req, resp);

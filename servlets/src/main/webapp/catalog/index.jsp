@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<%--<jsp:useBean id="followers" class="java.util.HashSet" scope="request"/>--%>
+<%--<jsp:useBean id="subscribes" class="java.util.HashSet" scope="request"/>--%>
 
 <table>
     <tr>
@@ -18,7 +18,7 @@
         <th>Caliber</th>
     </tr>
 
-    ${gunshop:getList(requestScope["followers"])}
+    ${gunshop:getList(requestScope["subscribes"])}
 </table>
 <a href="/GetUserServlet/?userHref="></a>
 </body>

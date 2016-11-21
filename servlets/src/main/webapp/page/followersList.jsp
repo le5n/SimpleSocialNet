@@ -1,11 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="/WEB-INF/followersList.tld" prefix="followersList" %>
+<%@ taglib uri="/WEB-INF/subscribesList.tld" prefix="followersList" %>
 <html>
 <head>
-    <title>Your followers</title>
+    <title>Your subscribes</title>
 </head>
 <body>
 <span>You follow</span>
-${followersList:getFollowersList(requestScope["followers"])}
+${followersList:getSubscribesList(requestScope["subscribes"])}
 </body>
 </html>

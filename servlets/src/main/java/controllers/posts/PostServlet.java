@@ -3,7 +3,6 @@ package controllers.posts;
 import dao.PostDao;
 import dao.SubscriptionDao;
 import social.Post;
-import social.User;
 import sql.SqlPostDao;
 import sql.SqlSubscribeDao;
 
@@ -23,7 +22,7 @@ public class PostServlet extends HttpServlet {
     private static final String POSTS = "posts";
     private static final String USER_ID = "userId";
     private static final String SUB_POSTS = "subPosts";
-    private static final String FOLLOWERS = "followers";
+    private static final String SUBSCRIBES = "subscribes";
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -35,11 +34,11 @@ public class PostServlet extends HttpServlet {
         int userId = (int) session.getAttribute(USER_ID);
         Collection<Post> posts = postDao.getPostsByUserId(userId);
         Collection<Post> subPosts = subscriptionDao.getSubPosts(userId);
-        Collection<Integer> followers = subscriptionDao.getSubIds(userId);
+        Collection<Integer> subIds = subscriptionDao.getSubIds(userId);
 
         req.setAttribute(POSTS, posts);
         req.setAttribute(SUB_POSTS, subPosts);
-        req.setAttribute(FOLLOWERS, followers);
+        req.setAttribute(SUBSCRIBES, subIds);
 
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("/page/userPage.jsp");
         requestDispatcher.forward(req, resp);

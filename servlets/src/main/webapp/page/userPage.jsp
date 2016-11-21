@@ -1,14 +1,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="/WEB-INF/postOut.tld" prefix="postOut" %>
 <%@ taglib uri="/WEB-INF/subPostOut.tld" prefix="subPostOut" %>
-<%@ taglib uri="/WEB-INF/followers.tld" prefix="countFollowers" %>
+<%@ taglib uri="/WEB-INF/subscribesAmount.tld" prefix="countSubscribes" %>
 <html>
 <head>
     <title>my page</title>
     <link rel="stylesheet" href="../_styles/style.css">
 </head>
 <body>
-<span>subscibes: <a href="/followersList"> ${countFollowers:countFollowers(requestScope["followers"])}</a></span>
+<span>subscribes: <a href="/followersList"> ${countSubscribes:countSubscribes(requestScope["subscribes"])}</a></span>
 <div>
     place for photo
     <form action="/logout" method="POST">
@@ -25,7 +25,7 @@
     </form>
 </div>
 <div align="left">
-    <span>My followers</span> <br/>
+    <span>My subscribes</span> <br/>
     <table border="1">
         <tr>
             <th>date</th>

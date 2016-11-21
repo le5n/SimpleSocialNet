@@ -10,18 +10,18 @@ import javax.servlet.jsp.tagext.TagSupport;
 import java.io.IOException;
 import java.util.Collection;
 
-public class FollowersList extends TagSupport {
+public class SubscribesList extends TagSupport {
 
-    private Collection<Integer> followers;
+    private Collection<Integer> subscribes;
 
-    public void setFollowers(Collection<Integer> followers) {
-        this.followers = followers;
+    public void setSubscribes(Collection<Integer> subscribes) {
+        this.subscribes = subscribes;
     }
 
     @Override
     public int doStartTag() throws JspException {
         try {
-            pageContext.getOut().print(getFollowers(followers));
+            pageContext.getOut().print(getSubscribes(subscribes));
         } catch (IOException | UserNotFoundException e) {
             e.printStackTrace();
         }
@@ -29,12 +29,12 @@ public class FollowersList extends TagSupport {
         return SKIP_BODY;
     }
 
-    public static String getFollowers(Collection<Integer> followers) throws IOException, UserNotFoundException {
+    public static String getSubscribes(Collection<Integer> subscribes) throws IOException, UserNotFoundException {
         UserDao userDao = new SqlUserDao();
 
         StringBuilder out = new StringBuilder();
 
-        for (Integer followerId : followers) {
+        for (Integer followerId : subscribes) {
             User user = userDao.getUserById(followerId);
             out.append("<a href=\"/GetUserServlet/?userHref=").append(user.getId()).append("\">").append(user.getUserName()).append("</a>").append("<br/>");
         }

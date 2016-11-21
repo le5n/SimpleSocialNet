@@ -6,24 +6,24 @@
         version="2.1">
 
     <tlib-version>1.0</tlib-version>
-    <short-name>followers</short-name>
-    <uri>http://followers.com</uri>
+    <short-name>subscribes</short-name>
+    <uri>http://subscribes.com</uri>
 
     <tag>
         <name>list</name>
-        <tag-class>tags.Followers</tag-class>
+        <tag-class>tags.Subscribes</tag-class>
         <body-content>empty</body-content>
         <attribute>
-            <name>followers</name>
+            <name>subscribes</name>
             <required>true</required>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
     </tag>
 
     <function>
-        <name>countFollowers</name>
-        <function-class>tags.Followers</function-class>
-        <function-signature>java.lang.String countFollowers(java.util.Collection)</function-signature>
+        <name>countSubscribes</name>
+        <function-class>tags.Subscribes</function-class>
+        <function-signature>java.lang.String countSubscribes(java.util.Collection)</function-signature>
     </function>
 
 </taglib>

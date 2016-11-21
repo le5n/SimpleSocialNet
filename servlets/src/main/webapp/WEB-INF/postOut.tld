@@ -14,7 +14,7 @@
         <tag-class>tags.Posts</tag-class>
         <body-content>empty</body-content>
         <attribute>
-            <name>followers</name>
+            <name>subscribes</name>
             <required>true</required>
             <rtexprvalue>true</rtexprvalue>
         </attribute>

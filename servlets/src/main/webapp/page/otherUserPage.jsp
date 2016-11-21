@@ -13,7 +13,7 @@
         <input type="hidden" value="${userID:getUserId(requestScope["userID"])}" name="idButton">
         <input type="submit" value="${subButton:getSubButton(requestScope["subButton"])}" name="subButton">
     </form>
-    <span>user followers:</span> <br/>
+    <span>user subscribes:</span> <br/>
     <table border="1">
         <tr>
             <th>date</th>

@@ -1,5 +1,5 @@
 CREATE SCHEMA `users` ;
-CREATE SCHEMA `followers` ;
+CREATE SCHEMA `subscribes` ;
 
 CREATE TABLE `users`.`users` (
   `id` INT NOT NULL AUTO_INCREMENT,
@@ -22,17 +22,17 @@ ALTER TABLE `users`.`users`
 
 
 
-CREATE TABLE `followers`.`followers` (
+CREATE TABLE `subscribes`.`subscribes` (
   `post_id` INT NOT NULL,
   `user_id` INT NOT NULL,
   `post_date` VARCHAR(100) NOT NULL,
   `post_text` VARCHAR(140) NOT NULL,
   PRIMARY KEY (`post_id`),
   UNIQUE INDEX `post_id_UNIQUE` (`post_id` ASC));
-ALTER TABLE `followers`.`followers`
+ALTER TABLE `subscribes`.`subscribes`
   CHANGE COLUMN `post_id` `post_id` INT(11) NOT NULL AUTO_INCREMENT ;
 
-INSERT INTO `followers`.`followers` (`post_id`, `user_id`, `post_date`, `post_text`) VALUES ('1', '6', '05.05.05', 'hello world');
+INSERT INTO `subscribes`.`subscribes` (`post_id`, `user_id`, `post_date`, `post_text`) VALUES ('1', '6', '05.05.05', 'hello world');
 
 CREATE TABLE `users`.`subscribes` (
   `user_id` INT NOT NULL,
