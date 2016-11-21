@@ -17,8 +17,9 @@ public class SqlSubscribeDao implements SubscriptionDao {
     private Collection<Integer> userSubs;
     private final String ADD_SUB = "INSERT INTO `users`.`subscribes` (`user_id`, `subscription`) VALUES (?, ?);";
     private final String FIND_SUB_ID = "SELECT * FROM users.subscribes WHERE user_id=? AND subscription=?;";
-    private final String GET_IDS = "SELECT * FROM `users`.`subscribes` WHERE user_id=?;";
+    private final String GET_SUB_IDS = "SELECT subscription FROM `users`.`subscribes` WHERE user_id=?;";
     private final String REMOVE_SUB = "DELETE FROM `users`.`subscribes` WHERE `sub_id`=?;";
+    private final String GET_FOLLOWERS = "SELECT user_id FROM `users`.`subscribes` WHERE subscription=?;";
 
     public SqlSubscribeDao() {
         if (connectionPool == null) {
@@ -69,25 +70,6 @@ public class SqlSubscribeDao implements SubscriptionDao {
     }
 
     @Override
-    public Collection<Integer> getSubIds(int userId) {
-        userSubs = new LinkedList<>();
-        try (Connection connection = connectionPool.getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(GET_IDS)) {
-            preparedStatement.setInt(1, userId);
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                while (resultSet.next()) {
-                    userSubs.add(resultSet.getInt(3));
-                }
-            }
-            return userSubs;
-        } catch (InterruptedException | SQLException e) {
-            e.printStackTrace();
-            return userSubs;
-        }
-
-    }
-
-    @Override
     public Collection<Post> getSubPosts(int userId) {
         PostDao sqlPostDao = new SqlPostDao();
         userSubs = getSubIds(userId);
@@ -99,5 +81,38 @@ public class SqlSubscribeDao implements SubscriptionDao {
         }
 
         return subPosts;
+    }
+
+    @Override
+    public Collection<Integer> getSubIds(int userId) {
+        return count("subscribes", userId);
+    }
+
+    @Override
+    public Collection<Integer> getFollowers(int userId) {
+        return count("followers", userId);
+    }
+
+    private Collection<Integer> count(String what, int userId) {
+        String prepSt;
+        if (what.equals("followers")) {
+            prepSt = GET_FOLLOWERS;
+        } else {
+            prepSt = GET_SUB_IDS;
+        }
+        userSubs = new LinkedList<>();
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(prepSt)) {
+            preparedStatement.setInt(1, userId);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    userSubs.add(resultSet.getInt(1));
+                }
+            }
+            return userSubs;
+        } catch (InterruptedException | SQLException e) {
+            e.printStackTrace();
+            return userSubs;
+        }
     }
 }

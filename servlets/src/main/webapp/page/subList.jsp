@@ -2,10 +2,10 @@
 <%@ taglib uri="/WEB-INF/subscribesList.tld" prefix="followersList" %>
 <html>
 <head>
-    <title>Followers</title>
+    <title>Your subscribes</title>
 </head>
 <body>
-<span>Your followers</span>
-${followersList:getSubscribesList(requestScope["followers"])}
+<span>You follow</span>
+${followersList:getSubscribesList(requestScope["subscribes"])}
 </body>
 </html>

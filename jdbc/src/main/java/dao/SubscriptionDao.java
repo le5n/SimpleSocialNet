@@ -9,4 +9,5 @@ public interface SubscriptionDao {
     void unsubscribe(int userId, int subId);
     Collection<Integer> getSubIds(int userId);
     Collection<Post> getSubPosts(int userId);
+    Collection<Integer> getFollowers(int userId);
 }
