@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+
 //// TODO: 21.11.2016  вылетает если ввести непоняно какой логин и пароль (null pointer exception)
 @WebServlet(urlPatterns = "/Login")
 public class LoginServlet extends HttpServlet {
@@ -26,25 +27,23 @@ public class LoginServlet extends HttpServlet {
         String typedPassword = request.getParameter("password");
         String hash = StringEncryptUtil.encrypt(typedPassword);
 
-        if (typedEmail.equals("") && typedPassword.equals("")) {
-            forward("/getin/error.html", request, response);
-        } else {
-            try {
-                User user = sqlUserDao.getUserByEmail(typedEmail);
-                if (user.getPassword().equals(hash)) {
+        try {
+            User user = sqlUserDao.getUserByEmail(typedEmail);
+            if (user.getPassword().equals(hash)) {
 
-                    session = request.getSession(true);
-                    session.setAttribute(KEY, new Object());
-                    session.setAttribute(USER_ID, user.getId());
+                session = request.getSession(true);
+                session.setAttribute(KEY, new Object());
+                session.setAttribute(USER_ID, user.getId());
 
-                    forward("/page/successLogin.html", request, response);
-                } else {
-                    forward("/getin/error.html", request, response);
-                }
-            } catch (UserNotFoundException e) {
-                e.printStackTrace();
-                forward("/getin/login.html", request, response);
+                forward("/page/successLogin.html", request, response);
+            } else {
+                forward("/getin/error.html", request, response);
             }
+        } catch (UserNotFoundException e) {
+            e.printStackTrace();
+            forward("/getin/login.html", request, response);
+        } catch (NullPointerException e) {
+            forward("/getin/error.html", request, response);
         }
     }
 

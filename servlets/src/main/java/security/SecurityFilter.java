@@ -19,10 +19,8 @@ public class SecurityFilter extends HttpFilter {
         HttpSession session = request.getSession();
 
         if (session.getAttribute(KEY) != null) {
-            System.out.println("key not null filter");
             chain.doFilter(request, response);
         } else {
-            System.out.println("key is null in filter check");
             forward("/getin/login.html", request,response);
         }
     }

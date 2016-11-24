@@ -18,11 +18,9 @@ public class LoginFilter extends HttpFilter {
         HttpSession session = request.getSession();
 
         if (session.getAttribute(KEY)!= null){
-            System.out.println("key not null in login");
             forward("/getin/alreadyLoged.html", request,response);
         }
         else{
-            System.out.println("key null in login");
             chain.doFilter(request,response);
         }
     }
