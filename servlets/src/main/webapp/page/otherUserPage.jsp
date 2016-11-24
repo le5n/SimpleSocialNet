@@ -3,12 +3,14 @@
 <%@ taglib uri="/WEB-INF/buttonWithId.tld" prefix="userID"%>
 <%@ taglib uri="/WEB-INF/subButton.tld" prefix="subButton"%>
 <%@ taglib uri="/WEB-INF/subscribesAmount.tld" prefix="countSubscribes" %>
+<%@ taglib uri="/WEB-INF/username.tld" prefix="getUsername" %>
 <html>
 <head>
     <title>another user page</title>
     <%--<link rel="stylesheet" href="../_styles/style.css">--%>
 </head>
 <body>
+<span>${getUsername:getUsername(requestScope["userID"])}</span>
 <div align="left">
     Followers:  <a href="/followersList/?userID=${userID:getUserId(requestScope["userID"])}">
     ${countSubscribes:countSubscribes(requestScope["otherFollowers"])}</a>

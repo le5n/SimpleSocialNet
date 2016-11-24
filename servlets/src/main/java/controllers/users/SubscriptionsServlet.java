@@ -24,16 +24,15 @@ public class SubscriptionsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         SubscriptionDao subscriptionDao = new SqlSubscribeDao();
         HttpSession session = req.getSession();
-        int userId = (int) session.getAttribute(USER_ID);
 
         Collection<Integer> subIds;
-        int pageId = Integer.parseInt(req.getParameter(PAGE_ID));
 
         if(req.getParameter(PAGE_ID)!=null) {
+            int pageId = Integer.parseInt(req.getParameter(PAGE_ID));
             subIds = subscriptionDao.getSubIds(pageId);
-
         }
         else {
+            int userId = (int) session.getAttribute(USER_ID);
             subIds = subscriptionDao.getSubIds(userId);
         }
 

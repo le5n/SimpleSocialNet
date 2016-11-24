@@ -18,14 +18,18 @@ import java.util.LinkedList;
 public class FollowersServlet extends HttpServlet {
     private static final String USER_ID = "userId";
     private static final String FOLLOWERS = "followers";
+    private static final String PAGE_ID = "userID";
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         SubscriptionDao subscriptionDao = new SqlSubscribeDao();
         HttpSession session = req.getSession();
         Collection<Integer> followers;
-        if (!req.getParameter("userID").equals(null)) {
-            followers = subscriptionDao.getFollowers(Integer.parseInt(req.getParameter("userID")));
+
+        if (req.getParameter("userID")!=null) {
+            int pageId = Integer.parseInt(req.getParameter(PAGE_ID));
+            followers = subscriptionDao.getFollowers(pageId);
 
         } else {
             int userId = (int) session.getAttribute(USER_ID);

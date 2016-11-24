@@ -1,0 +1,20 @@
+forall{
+    background-color: antiquewhite;
+    color: #000;
+}
+textarea{
+    background-color: lightpink;
+}
+#left {
+    background-color: lightgreen;
+    float: left;
+    width: 50%;
+    height:100%;
+}
+
+#right {
+    background-color: lightblue;
+    width: 50%;
+    height:100%;
+    float: right;
+}
