@@ -5,7 +5,7 @@
     <title>Your subscribes</title>
 </head>
 <body>
-<span>You follow</span>
+<span>Subscribes</span>
 ${followersList:getSubscribesList(requestScope["subscribes"])}
 </body>
 </html>

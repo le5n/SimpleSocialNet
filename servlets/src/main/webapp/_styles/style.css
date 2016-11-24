@@ -6,7 +6,10 @@ form button {
 }
 
 body {
-    background-color: darkslategrey;
+    background-color: antiquewhite;
+    color: #000;
     margin: 0;
-    color: aliceblue;
+}
+font{
+    color: transparent;
 }

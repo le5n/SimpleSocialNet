@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Collection;
+import java.util.LinkedList;
 
 @WebServlet("/followersList/")
 public class FollowersServlet extends HttpServlet {
@@ -22,16 +23,16 @@ public class FollowersServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         SubscriptionDao subscriptionDao = new SqlSubscribeDao();
         HttpSession session = req.getSession();
+        Collection<Integer> followers;
         if (!req.getParameter("userID").equals(null)) {
-            Collection<Integer> followers = subscriptionDao.getFollowers(Integer.parseInt(req.getParameter("userID")));
+            followers = subscriptionDao.getFollowers(Integer.parseInt(req.getParameter("userID")));
 
-            req.setAttribute(FOLLOWERS, followers);
         } else {
             int userId = (int) session.getAttribute(USER_ID);
-            Collection<Integer> followers = subscriptionDao.getFollowers(userId);
+            followers = subscriptionDao.getFollowers(userId);
 
-            req.setAttribute(FOLLOWERS, followers);
         }
+        req.setAttribute(FOLLOWERS, followers);
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("/page/followersList.jsp");
         requestDispatcher.forward(req, resp);
     }

@@ -19,9 +19,12 @@ import java.util.Collection;
 @WebServlet("/GetUserServlet/")
 public class GetUserServlet extends HttpServlet {
     private static final String POSTS = "anotherPosts";
-    private static final String USER_ID = "userID";
+    private static final String PAGE_ID = "userID";
     private static final String SUB_BUTTON = "subButton";
     private static final String CURRENT_USER_ID = "userId";
+    private static final String OTHER_FOLLOWERS = "otherFollowers";
+    private static final String OTHER_SUBSCRIBES = "otherSubscribes";
+
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PostDao postDao = new SqlPostDao();
@@ -29,13 +32,16 @@ public class GetUserServlet extends HttpServlet {
         HttpSession session = request.getSession();
         int currentUserId = (int) session.getAttribute(CURRENT_USER_ID);
 
-        int userId = Integer.parseInt(request.getParameter("userHref"));
+        int pageId = Integer.parseInt(request.getParameter("userHref"));
+        System.out.println(pageId+ "pageid in get user servlet");
 
-        Collection<Post> posts = postDao.getPostsByUserId(userId);
+        Collection<Integer> otherSubscribes = subscriptionDao.getSubIds(pageId);
+        Collection<Integer> otherFollowers = subscriptionDao.getFollowers(pageId);
 
+        Collection<Post> posts = postDao.getPostsByUserId(pageId);
         Collection<Integer> subscribes = subscriptionDao.getSubIds(currentUserId);
 
-        if(subscribes.contains(userId)){
+        if(subscribes.contains(pageId)){
             request.setAttribute(SUB_BUTTON, true);
         }
         else {
@@ -43,7 +49,9 @@ public class GetUserServlet extends HttpServlet {
         }
 
         request.setAttribute(POSTS, posts);
-        request.setAttribute(USER_ID,userId);
+        request.setAttribute(PAGE_ID,pageId);
+        request.setAttribute(OTHER_SUBSCRIBES, otherSubscribes);
+        request.setAttribute(OTHER_FOLLOWERS, otherFollowers);
 
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/page/otherUserPage.jsp");
         requestDispatcher.forward(request, response);
