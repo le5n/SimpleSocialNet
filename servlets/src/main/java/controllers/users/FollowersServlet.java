@@ -13,8 +13,8 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Collection;
 
-@WebServlet("/followersList")
-public class FollowersServlet extends HttpServlet{
+@WebServlet("/followersList/")
+public class FollowersServlet extends HttpServlet {
     private static final String USER_ID = "userId";
     private static final String FOLLOWERS = "followers";
 
@@ -22,12 +22,16 @@ public class FollowersServlet extends HttpServlet{
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         SubscriptionDao subscriptionDao = new SqlSubscribeDao();
         HttpSession session = req.getSession();
+        if (!req.getParameter("userID").equals(null)) {
+            Collection<Integer> followers = subscriptionDao.getFollowers(Integer.parseInt(req.getParameter("userID")));
 
-        int userId = (int) session.getAttribute(USER_ID);
-        Collection<Integer> followers = subscriptionDao.getFollowers(userId);
+            req.setAttribute(FOLLOWERS, followers);
+        } else {
+            int userId = (int) session.getAttribute(USER_ID);
+            Collection<Integer> followers = subscriptionDao.getFollowers(userId);
 
-        req.setAttribute(FOLLOWERS, followers);
-
+            req.setAttribute(FOLLOWERS, followers);
+        }
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("/page/followersList.jsp");
         requestDispatcher.forward(req, resp);
     }

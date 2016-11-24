@@ -8,8 +8,8 @@
     <%--<link rel="stylesheet" href="../_styles/style.css">--%>
 </head>
 <body>
-<span>subscribes: <a href="/subscribeList"> ${countSubscribes:countSubscribes(requestScope["subscribes"])}</a></span>
-<span>followers: <a href="/followersList"> ${countSubscribes:countSubscribes(requestScope["followers"])}></a></span>
+<span>subscribes: <a href="/subscribeList/"> ${countSubscribes:countSubscribes(requestScope["subscribes"])}</a></span>
+<span>followers: <a href="/followersList/"> ${countSubscribes:countSubscribes(requestScope["followers"])}></a></span>
 <div>
     place for photo
     <form action="/logout" method="POST">
