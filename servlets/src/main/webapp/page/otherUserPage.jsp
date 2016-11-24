@@ -18,7 +18,8 @@
     ${countSubscribes:countSubscribes(requestScope["otherSubscribes"])}</a>
 </div>
 <div align="middle">
-    <form action="/SubscribeServlet/?userID=${userID:getUserId(requestScope["userID"])}">
+    <form action="/SubscribeServlet/">
+        <input type="hidden" value="${userID:getUserId(requestScope["userID"])}" name="idButton">
         <input type="submit" value="${subButton:getSubButton(requestScope["subButton"])}" name="subButton">
     </form>
     <span>user subscribes:</span> <br/>

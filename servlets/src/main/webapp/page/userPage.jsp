@@ -21,14 +21,14 @@ Hello, ${getUsername:getUsername(sessionScope["userId"])}
         <button type="submit">all users</button>
     </form>
 </div>
-<div align="left">
+<div align="middle">
     <form action="/AddPostServlet">
         <textarea name="newPost" rows="4" cols="55" placeholder="enter the post"></textarea><br/><br/>
         <button type="submit">Post</button>
     </form>
 </div>
-<div align="left">
-    <span>My subscribes</span> <br/>
+<div align="middle" id="left">
+    <span>My posts</span> <br/>
     <table border="1">
         <tr>
             <th>date</th>
@@ -40,7 +40,8 @@ Hello, ${getUsername:getUsername(sessionScope["userId"])}
     </table>
     <br/>
 </div>
-<div align="middle">
+<div align="middle" id="right">
+    <span>My subscribes</span>
     <table border="1">
     <tr>
         <th>user</th>
