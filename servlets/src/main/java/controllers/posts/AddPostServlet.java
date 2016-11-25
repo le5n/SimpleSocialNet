@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 @WebServlet("/AddPostServlet")
 
@@ -24,12 +25,20 @@ public class AddPostServlet extends HttpServlet {
         PostDao postDao = new SqlPostDao();
 
         String postText = request.getParameter("newPost");
-        HttpSession session = request.getSession();
-        int userId = (int)session.getAttribute(USER_ID);
-        postDao.addPost(postText,userId);
+        if(postText.length()>140){
+            PrintWriter out = response.getWriter();
+            out.write("Post is too long, press back arrow to go back to your page");
+        } else {
+            HttpSession session = request.getSession();
+            int userId = (int) session.getAttribute(USER_ID);
+            postDao.addPost(postText, userId);
 
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/page/");
-        dispatcher.forward(request, response);
+            forward("/page/", request, response);
+        }
 
+    }
+
+    private void forward(String path, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher(path).forward(request, response);
     }
 }

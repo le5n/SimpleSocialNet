@@ -6,7 +6,6 @@ import social.Post;
 import sql.SqlPostDao;
 import sql.SqlSubscribeDao;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -29,31 +28,39 @@ public class GetUserServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PostDao postDao = new SqlPostDao();
         SubscriptionDao subscriptionDao = new SqlSubscribeDao();
+
         HttpSession session = request.getSession();
+
         int currentUserId = (int) session.getAttribute(CURRENT_USER_ID);
-
         int pageId = Integer.parseInt(request.getParameter("userHref"));
-        System.out.println(pageId+ "pageid in get user servlet");
 
-        Collection<Integer> otherSubscribes = subscriptionDao.getSubIds(pageId);
-        Collection<Integer> otherFollowers = subscriptionDao.getFollowers(pageId);
+        if (currentUserId == pageId) {
+            forward("/page/", request, response);
+        } else {
+            Collection<Integer> otherSubscribes = subscriptionDao.getSubIds(pageId);
+            Collection<Integer> otherFollowers = subscriptionDao.getFollowers(pageId);
 
-        Collection<Post> posts = postDao.getPostsByUserId(pageId);
-        Collection<Integer> subscribes = subscriptionDao.getSubIds(currentUserId);
+            Collection<Post> posts = postDao.getPostsByUserId(pageId);
+            Collection<Integer> subscribes = subscriptionDao.getSubIds(currentUserId);
 
-        if(subscribes.contains(pageId)){
-            request.setAttribute(SUB_BUTTON, true);
+            if (subscribes.contains(pageId)) {
+                request.setAttribute(SUB_BUTTON, true);
+            } else {
+                request.setAttribute(SUB_BUTTON, false);
+            }
+
+            request.setAttribute(POSTS, posts);
+            request.setAttribute(PAGE_ID, pageId);
+            request.setAttribute(OTHER_SUBSCRIBES, otherSubscribes);
+            request.setAttribute(OTHER_FOLLOWERS, otherFollowers);
+
+            forward("/page/otherUserPage.jsp", request, response);
         }
-        else {
-            request.setAttribute(SUB_BUTTON, false);
-        }
 
-        request.setAttribute(POSTS, posts);
-        request.setAttribute(PAGE_ID,pageId);
-        request.setAttribute(OTHER_SUBSCRIBES, otherSubscribes);
-        request.setAttribute(OTHER_FOLLOWERS, otherFollowers);
+    }
 
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/page/otherUserPage.jsp");
-        requestDispatcher.forward(request, response);
+
+    private void forward(String path, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher(path).forward(request, response);
     }
 }

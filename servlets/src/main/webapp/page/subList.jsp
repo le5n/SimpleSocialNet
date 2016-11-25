@@ -5,7 +5,19 @@
     <title>Your subscribes</title>
 </head>
 <body>
-<span>Subscribes</span>
-${followersList:getSubscribesList(requestScope["subscribes"])}
+<div align="right">
+    <form action="/logout" method="POST">
+        <button type="submit">logout</button>
+    </form>
+</div>
+<div align="left">
+    <form action="/page/">
+        <button type="submit">my page</button>
+    </form>
+</div>
+<div align="middle">
+    <span>Subscribes</span>
+    ${followersList:getSubscribesList(requestScope["subscribes"])}
+</div>
 </body>
 </html>

@@ -11,16 +11,18 @@
 </head>
 <body>
 <span>subscribes: <a href="/subscribeList/"> ${countSubscribes:countSubscribes(requestScope["subscribes"])}</a></span>
-<span>followers: <a href="/followersList/"> ${countSubscribes:countSubscribes(requestScope["followers"])}></a></span>
+<span>followers: <a href="/followersList/"> ${countSubscribes:countSubscribes(requestScope["followers"])}</a></span>
 <div>
 Hello, ${getUsername:getUsername(sessionScope["userId"])}
+    </div>
+<div align="right">
     <form action="/logout" method="POST">
         <button type="submit">logout</button>
     </form>
+</div>
     <form action="/GetAllUsers">
         <button type="submit">all users</button>
     </form>
-</div>
 <div align="middle">
     <form action="/AddPostServlet">
         <textarea name="newPost" rows="4" cols="55" placeholder="enter the post"></textarea><br/><br/>
