@@ -1,4 +1,4 @@
-package security;
+package filters.security;
 
 
 import javax.servlet.FilterChain;

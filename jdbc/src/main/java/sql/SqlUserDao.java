@@ -13,6 +13,7 @@ import java.util.Collection;
 public class SqlUserDao implements UserDao {
 
     private Collection<User> allUsers = new ArrayList<>();
+    private static SqlUserDao sqlUserDao;
 
     private static ConnectionPool connectionPool;
     private final String GET_ALL_USERS = "SELECT * FROM users.users;";
