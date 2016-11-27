@@ -1,5 +1,6 @@
 package controllers.users;
 
+import exceptions.UserAlreadyExistsException;
 import social.User;
 import sql.SqlUserDao;
 
@@ -33,8 +34,11 @@ public class AddUserServlet extends HttpServlet {
         }
         if (checkPas.equals(password) && correctEmail(email)) {
             User user = new User(1, name, lastName, email, password, userName);
-            sqlUserDao.addUser(user);
-            //sqlUserDao.setRole(userName,"user");
+            try {
+                sqlUserDao.addUser(user);
+            } catch (UserAlreadyExistsException e) {
+                e.printStackTrace();
+            }
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/registration/success.html");
             dispatcher.forward(request, response);
         } else {

@@ -2,6 +2,7 @@ package sql;
 
 import common.ConnectionPool;
 import dao.UserDao;
+import exceptions.UserAlreadyExistsException;
 import exceptions.UserNotFoundException;
 import security.StringEncryptUtil;
 import social.User;
@@ -34,7 +35,8 @@ public class SqlUserDao implements UserDao {
         }
     }
 
-    public void addUser(User user) {
+    @Override
+    public void addUser(User user) throws UserAlreadyExistsException {
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement prepStUser = connection.prepareStatement(ADD_USER)) {
 
@@ -132,7 +134,7 @@ public class SqlUserDao implements UserDao {
     }
 
     @Override
-    public void changeUsername(String email, String newUsername) {
+    public void changeUsername(String email, String newUsername) throws UserNotFoundException {
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement prepSt = connection.prepareStatement(CHANGE_USERNAME)) {
             prepSt.setString(1, newUsername);
