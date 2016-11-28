@@ -18,17 +18,13 @@ public class SubButton extends TagSupport {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return SKIP_BODY;
     }
 
     public static String showButton(boolean isSubscribed) throws IOException {
         if (!isSubscribed)
             return "subscribe";
-        else if (isSubscribed)
-            return "unsubscribe";
-        else
-            return "unknown";
+        else return "unsubscribe";
 
     }
 }

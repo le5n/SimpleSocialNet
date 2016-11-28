@@ -30,7 +30,6 @@ public class SubPosts extends TagSupport {
         } catch (IOException | UserNotFoundException e) {
             e.printStackTrace();
         }
-
         return SKIP_BODY;
     }
 

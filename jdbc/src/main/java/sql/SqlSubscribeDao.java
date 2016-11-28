@@ -3,6 +3,8 @@ package sql;
 import common.ConnectionPool;
 import dao.PostDao;
 import dao.SubscriptionDao;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import social.Post;
 
 import java.sql.Connection;
@@ -13,6 +15,7 @@ import java.util.Collection;
 import java.util.LinkedList;
 
 public class SqlSubscribeDao implements SubscriptionDao {
+    private static final Logger log = LogManager.getLogger(SqlSubscribeDao.class);
     private ConnectionPool connectionPool;
     private Collection<Integer> userSubs;
     private final String ADD_SUB = "INSERT INTO `users`.`subscribes` (`user_id`, `subscription`) VALUES (?, ?);";
@@ -25,6 +28,7 @@ public class SqlSubscribeDao implements SubscriptionDao {
         if (connectionPool == null) {
             synchronized (ConnectionPool.class) {
                 if (connectionPool == null) {
+                    log.debug("Initialize of con pool from " + SqlSubscribeDao.class);
                     connectionPool = ConnectionPool.getInstance(
                             "D:\\\\Программы\\\\SimpleSocialNet\\\\jdbc\\\\src\\\\main\\\\resources\\\\userData.properties");
                 }
@@ -37,6 +41,7 @@ public class SqlSubscribeDao implements SubscriptionDao {
         try (Connection connection = connectionPool.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(FIND_SUB_ID);
              PreparedStatement delete = connection.prepareStatement(REMOVE_SUB)) {
+
             preparedStatement.setInt(1, userId);
             preparedStatement.setInt(2, subId);
             int sub_id = 0;
@@ -49,9 +54,8 @@ public class SqlSubscribeDao implements SubscriptionDao {
             delete.setInt(1, sub_id);
             delete.execute();
 
-
         } catch (InterruptedException | SQLException e) {
-            e.printStackTrace();
+            log.error("Cannot unsubscribe from " +subId + " by " + userId, e);
         }
     }
 
@@ -65,7 +69,7 @@ public class SqlSubscribeDao implements SubscriptionDao {
             preparedStatement.execute();
 
         } catch (InterruptedException | SQLException e) {
-            e.printStackTrace();
+            log.error("Cannot addSubscription from userId = " + userId + " to " + subId, e);
         }
     }
 
@@ -111,7 +115,7 @@ public class SqlSubscribeDao implements SubscriptionDao {
             }
             return userSubs;
         } catch (InterruptedException | SQLException e) {
-            e.printStackTrace();
+            log.error("cannot count followers from userId " + userId, e);
             return userSubs;
         }
     }

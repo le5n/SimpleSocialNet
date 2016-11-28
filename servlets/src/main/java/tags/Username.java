@@ -22,7 +22,6 @@ public class Username extends TagSupport {
         } catch (IOException | UserNotFoundException e) {
             e.printStackTrace();
         }
-
         return SKIP_BODY;
     }
 

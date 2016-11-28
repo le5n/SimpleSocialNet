@@ -56,7 +56,6 @@ public class GetUserServlet extends HttpServlet {
 
             forward("/page/otherUserPage.jsp", request, response);
         }
-
     }
 
 

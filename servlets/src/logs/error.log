@@ -1,4 +1,6 @@
-2016-11-28T15:18:32,932 [WARN ] (LoginServlet.java:54) - Null pointer exception
-2016-11-28T15:28:14,405 [WARN ] (LoginServlet.java:53) - Null pointer exception
-2016-11-28T15:28:14,476 [ERROR] (LoginServlet.java:54) - null pointer exception
-2016-11-28T15:28:29,465 [INFO ] (LoginServlet.java:37) - login in the site
+2016-11-29T00:06:49,110 [DEBUG] (SqlUserDao.java:33) - Initialize of con pool from class sql.SqlUserDao
+2016-11-29T00:06:49,153 [DEBUG] (ConnectionPool.java:26) - instance of connection pool inited
+2016-11-29T00:07:09,018 [DEBUG] (SqlPostDao.java:32) - Initialize of con pool from class sql.SqlPostDao
+2016-11-29T00:07:09,028 [DEBUG] (SqlSubscribeDao.java:31) - Initialize of con pool from class sql.SqlSubscribeDao
+2016-11-29T00:08:34,239 [DEBUG] (SqlSubscribeDao.java:31) - Initialize of con pool from class sql.SqlSubscribeDao
+2016-11-29T00:08:48,121 [DEBUG] (SqlSubscribeDao.java:31) - Initialize of con pool from class sql.SqlSubscribeDao

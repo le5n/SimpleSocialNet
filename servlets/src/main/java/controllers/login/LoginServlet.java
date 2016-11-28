@@ -39,14 +39,17 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute(KEY, new Object());
                 session.setAttribute(USER_ID, user.getId());
 
+                log.info("user logged in, userId = " +user.getId());
+
                 forward("/page/successLogin.html", request, response);
             } else {
                 forward("/login/error.html", request, response);
             }
         } catch (UserNotFoundException e) {
-            e.printStackTrace();
+            log.warn("user failed to login", e);
             forward("/login/login.html", request, response);
         } catch (NullPointerException e) {
+            log.warn("some fields were left empty in login", e);
             forward("/login/error.html", request, response);
         }
     }

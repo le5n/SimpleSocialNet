@@ -22,7 +22,6 @@ public class AllUsers extends TagSupport {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return SKIP_BODY;
     }
 

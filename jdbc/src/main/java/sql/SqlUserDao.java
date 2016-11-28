@@ -4,6 +4,8 @@ import common.ConnectionPool;
 import dao.UserDao;
 import exceptions.UserAlreadyExistsException;
 import exceptions.UserNotFoundException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import security.StringEncryptUtil;
 import social.User;
 
@@ -14,7 +16,7 @@ import java.util.Collection;
 public class SqlUserDao implements UserDao {
 
     private Collection<User> allUsers = new ArrayList<>();
-    private static SqlUserDao sqlUserDao;
+    private static final Logger log = LogManager.getLogger(SqlUserDao.class);
 
     private static ConnectionPool connectionPool;
     private final String GET_ALL_USERS = "SELECT * FROM users.users;";
@@ -28,6 +30,7 @@ public class SqlUserDao implements UserDao {
         if (connectionPool == null) {
             synchronized (ConnectionPool.class) {
                 if (connectionPool == null) {
+                    log.debug("Initialize of con pool from " + SqlUserDao.class);
                     connectionPool = ConnectionPool.getInstance(
                             "D:\\\\Программы\\\\SimpleSocialNet\\\\jdbc\\\\src\\\\main\\\\resources\\\\userData.properties");
                 }
@@ -51,7 +54,7 @@ public class SqlUserDao implements UserDao {
             prepStUser.execute();
 
         } catch (InterruptedException | SQLException e) {
-            e.printStackTrace();
+            log.error("Cannot addUser", e);
         }
     }
 
@@ -73,7 +76,7 @@ public class SqlUserDao implements UserDao {
                 );
             }
         } catch (SQLException | InterruptedException e) {
-            e.printStackTrace();
+            log.error("Cannot getAllUsers", e);
         }
 
         return allUsers;
@@ -100,7 +103,7 @@ public class SqlUserDao implements UserDao {
             }
 
         } catch (InterruptedException | SQLException e) {
-            e.printStackTrace();
+            log.error("Cannot get user by id = " + id, e);
         }
 
         return user;
@@ -125,14 +128,12 @@ public class SqlUserDao implements UserDao {
                         resultSet.getString("username")
                 );
             }
-
         } catch (InterruptedException | SQLException e) {
-            e.printStackTrace();
+            log.error("Cannot get user by email, where email = " + email, e);
         }
-
         return user;
     }
-
+//// TODO: 28.11.2016 add this ability to the app
     @Override
     public void changeUsername(String email, String newUsername) throws UserNotFoundException {
         try (Connection connection = connectionPool.getConnection();
@@ -141,7 +142,7 @@ public class SqlUserDao implements UserDao {
             prepSt.setString(2, email);
             prepSt.execute();
         } catch (InterruptedException | SQLException e) {
-            e.printStackTrace();
+            log.error("Cannot change username where email=" + email, e);
         }
     }
 }

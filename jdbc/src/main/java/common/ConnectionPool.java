@@ -1,5 +1,8 @@
 package common;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
@@ -9,14 +12,18 @@ import java.util.Properties;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
+
+
 public class ConnectionPool implements AutoCloseable {
     private BlockingQueue<PooledConnection> connectionQueue;
     private static ConnectionPool instance;
+    private static final Logger log = LogManager.getLogger(ConnectionPool.class);
 
     public static ConnectionPool getInstance(String pathConfig) {
         if (instance == null) {
             synchronized (ConnectionPool.class) {
                 if (instance == null) {
+                    log.debug("instance of connection pool inited");
                     instance = new ConnectionPool(pathConfig);
                 }
             }
@@ -30,7 +37,7 @@ public class ConnectionPool implements AutoCloseable {
             properties.load(new FileInputStream(pathToConfig));
             Class.forName(properties.getProperty("driver"));
         } catch (ClassNotFoundException | IOException e) {
-            e.printStackTrace();
+            log.error("Cannon init constructor for connection pool", e);
         }
 
         String url = properties.getProperty("url");
@@ -42,7 +49,7 @@ public class ConnectionPool implements AutoCloseable {
             try {
                 connectionQueue.add(new PooledConnection(DriverManager.getConnection(url, properties), this));
             } catch (SQLException e) {
-                e.printStackTrace();
+               log.error("cannot add connection to connection pool", e);
             }
         }
     }

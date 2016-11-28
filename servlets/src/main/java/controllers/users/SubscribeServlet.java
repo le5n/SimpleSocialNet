@@ -28,7 +28,6 @@ public class SubscribeServlet extends HttpServlet {
         System.out.println(pageId+"this is current user id");
 
 
-
         if (isSubscribed.equals("subscribe")) {
             subscriptionDao.addSubscription(userId,pageId);
         } else {
