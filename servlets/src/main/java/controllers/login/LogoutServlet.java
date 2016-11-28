@@ -15,7 +15,7 @@ public class LogoutServlet extends HttpServlet {
         HttpSession session = request.getSession();
         session.invalidate();
 
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/getin/login.html");
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login/login.html");
         dispatcher.forward(request, response);
     }
 }

@@ -1,0 +1,4 @@
+2016-11-28T15:18:32,932 [WARN ] (LoginServlet.java:54) - Null pointer exception
+2016-11-28T15:28:14,405 [WARN ] (LoginServlet.java:53) - Null pointer exception
+2016-11-28T15:28:14,476 [ERROR] (LoginServlet.java:54) - null pointer exception
+2016-11-28T15:28:29,465 [INFO ] (LoginServlet.java:37) - login in the site

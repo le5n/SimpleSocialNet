@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebFilter(urlPatterns = {"/getin/login.html"})
+@WebFilter(urlPatterns = {"/login/login.html"})
 public class LoginFilter extends HttpFilter {
     private static final String KEY = "key";
     @Override
@@ -18,7 +18,7 @@ public class LoginFilter extends HttpFilter {
         HttpSession session = request.getSession();
 
         if (session.getAttribute(KEY)!= null){
-            forward("/getin/alreadyLoged.html", request,response);
+            forward("/login/alreadyLoged.html", request,response);
         }
         else{
             chain.doFilter(request,response);

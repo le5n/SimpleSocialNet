@@ -21,7 +21,7 @@ public class SecurityFilter extends HttpFilter {
         if (session.getAttribute(KEY) != null) {
             chain.doFilter(request, response);
         } else {
-            forward("/getin/login.html", request,response);
+            forward("/login/login.html", request,response);
         }
     }
 
