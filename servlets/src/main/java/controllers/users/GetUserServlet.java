@@ -26,8 +26,8 @@ public class GetUserServlet extends HttpServlet {
 
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        PostDao postDao = new SqlPostDao();
-        SubscriptionDao subscriptionDao = new SqlSubscribeDao();
+        PostDao postDao = SqlPostDao.getInstance();
+        SubscriptionDao subscriptionDao = SqlSubscribeDao.getInstance();
 
         HttpSession session = request.getSession();
 

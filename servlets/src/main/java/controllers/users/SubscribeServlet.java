@@ -17,7 +17,7 @@ public class SubscribeServlet extends HttpServlet {
     private static final String USER_ID = "userId";
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        SubscriptionDao subscriptionDao = new SqlSubscribeDao();
+        SubscriptionDao subscriptionDao = SqlSubscribeDao.getInstance();
 
         HttpSession session = request.getSession();
         String isSubscribed = request.getParameter("subButton");

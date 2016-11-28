@@ -18,7 +18,7 @@ import org.apache.logging.log4j.Logger;
 public class AddUserServlet extends HttpServlet {
 
     private static final Logger log = LogManager.getLogger(AddUserServlet.class);
-    private SqlUserDao sqlUserDao = new SqlUserDao();
+    private SqlUserDao sqlUserDao = SqlUserDao.getInstance();
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String name = request.getParameter("name");

@@ -16,7 +16,7 @@ public class AllUsersServlet extends HttpServlet {
     private static final String USERS = "users";
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        UserDao userDao = new SqlUserDao();
+        UserDao userDao = SqlUserDao.getInstance();
 
         request.setAttribute(USERS, userDao.getAll());
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/page/allUsers.jsp");

@@ -2,6 +2,8 @@ package sql;
 
 import common.ConnectionPool;
 import dao.PostDao;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import social.Post;
 
 import java.sql.*;
@@ -15,21 +17,35 @@ import java.util.Collection;
 public class SqlPostDao implements PostDao {
 
     private static ConnectionPool connectionPool;
+    private static SqlPostDao sqlPostDao;
     private Collection<Post> allPosts = new ArrayList<>();
+
+    private static Logger log = LogManager.getLogger(SqlPostDao.class);
 
     private final String GET_ALL_POSTS = "SELECT * FROM posts.posts;";
     private final String GET_BY_POST_ID = "SELECT * FROM posts.posts WHERE post_id=?";
     private final String GET_POSTS_BY_USER_ID = "SELECT * FROM posts.posts WHERE user_id=?";
-    private static final String ADD_POST = "INSERT INTO `posts`.`posts` (`user_id`, `post_date`, `post_text`) VALUES (?,?,?);";
+    private final String ADD_POST = "INSERT INTO `posts`.`posts` (`user_id`, `post_date`, `post_text`) VALUES (?,?,?);";
 
-    public SqlPostDao() {
-        if (connectionPool == null) {
-            synchronized (ConnectionPool.class) {
-                if (connectionPool == null) {
-                    connectionPool = ConnectionPool.getInstance(
-                            "D:\\Программы\\SimpleSocialNet\\jdbc\\src\\main\\resources\\postData.properties");
+    public static SqlPostDao getInstance() {
+        SqlPostDao localInstance = sqlPostDao;
+        if (localInstance == null) {
+            synchronized (SqlPostDao.class) {
+                localInstance = sqlPostDao;
+                if(localInstance == null) {
+                    log.debug("gettting instance of SqlPostDao");
+                    sqlPostDao = new SqlPostDao();
                 }
             }
+        }
+        return sqlPostDao;
+    }
+
+    private SqlPostDao() {
+        if(connectionPool == null) {
+            log.debug("SqlPostDao constructor inited");
+            connectionPool = ConnectionPool.getInstance(
+                    "D:\\Программы\\SimpleSocialNet\\jdbc\\src\\main\\resources\\postData.properties");
         }
     }
 

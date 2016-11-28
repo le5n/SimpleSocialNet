@@ -29,7 +29,7 @@ public class SubscribesList extends TagSupport {
     }
 
     public static String getSubscribes(Collection<Integer> subscribes) throws IOException, UserNotFoundException {
-        UserDao userDao = new SqlUserDao();
+        UserDao userDao = SqlUserDao.getInstance();
 
         StringBuilder out = new StringBuilder();
 

@@ -34,7 +34,7 @@ public class SubPosts extends TagSupport {
     }
 
     public static String getPostList(Collection<Post> posts) throws IOException, UserNotFoundException {
-        UserDao userDao = new SqlUserDao();
+        UserDao userDao = SqlUserDao.getInstance();
         StringBuilder out = new StringBuilder();
 
         List<Post> listPosts = (List) posts;

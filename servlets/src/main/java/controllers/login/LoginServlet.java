@@ -25,7 +25,7 @@ public class LoginServlet extends HttpServlet {
     private static final Logger log = LogManager.getLogger(LoginServlet.class);
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        SqlUserDao sqlUserDao = new SqlUserDao();
+        SqlUserDao sqlUserDao = SqlUserDao.getInstance();
         HttpSession session;
 
         String typedEmail = request.getParameter("email");

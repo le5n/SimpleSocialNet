@@ -23,7 +23,7 @@ public class FollowersServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        SubscriptionDao subscriptionDao = new SqlSubscribeDao();
+        SubscriptionDao subscriptionDao = SqlSubscribeDao.getInstance();
         HttpSession session = req.getSession();
         Collection<Integer> followers;
 

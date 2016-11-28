@@ -22,7 +22,7 @@ public class AddPostServlet extends HttpServlet {
 
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        PostDao postDao = new SqlPostDao();
+        PostDao postDao = SqlPostDao.getInstance();
 
         String postText = request.getParameter("newPost");
         if(postText.length()>140){

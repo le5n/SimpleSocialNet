@@ -17,7 +17,7 @@ public class SqlUserDao implements UserDao {
 
     private Collection<User> allUsers = new ArrayList<>();
     private static final Logger log = LogManager.getLogger(SqlUserDao.class);
-
+    private static SqlUserDao sqlUserDao;
     private static ConnectionPool connectionPool;
     private final String GET_ALL_USERS = "SELECT * FROM users.users;";
     private final String GET_USER_BY_ID = "SELECT * FROM users.users WHERE id=?";
@@ -26,17 +26,26 @@ public class SqlUserDao implements UserDao {
             "VALUES (?, ?, ?, ?, ?);";
     private final String CHANGE_USERNAME = "UPDATE `users`.`users` SET `username`=? WHERE `email`=?;";
 
-    public SqlUserDao() {
-        if (connectionPool == null) {
-            synchronized (ConnectionPool.class) {
-                if (connectionPool == null) {
-                    log.debug("Initialize of con pool from " + SqlUserDao.class);
-                    connectionPool = ConnectionPool.getInstance(
-                            "D:\\\\Программы\\\\SimpleSocialNet\\\\jdbc\\\\src\\\\main\\\\resources\\\\userData.properties");
+    public static SqlUserDao getInstance() {
+        if (sqlUserDao == null) {
+            synchronized (SqlPostDao.class) {
+                if (sqlUserDao == null) {
+                    log.debug("gettting instance of " + SqlUserDao.class);
+                    sqlUserDao = new SqlUserDao();
                 }
             }
         }
+        return sqlUserDao;
     }
+
+    private SqlUserDao() {
+        if(connectionPool==null) {
+            log.debug(SqlUserDao.class + " constructor inited");
+            connectionPool = ConnectionPool.getInstance(
+                    "D:\\Программы\\SimpleSocialNet\\jdbc\\src\\main\\resources\\postData.properties");
+        }
+    }
+
 
     @Override
     public void addUser(User user) throws UserAlreadyExistsException {
@@ -133,7 +142,8 @@ public class SqlUserDao implements UserDao {
         }
         return user;
     }
-//// TODO: 28.11.2016 add this ability to the app
+
+    //// TODO: 28.11.2016 add this ability to the app
     @Override
     public void changeUsername(String email, String newUsername) throws UserNotFoundException {
         try (Connection connection = connectionPool.getConnection();

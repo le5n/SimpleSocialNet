@@ -26,7 +26,7 @@ public class Username extends TagSupport {
     }
 
     public static String getUsername(int userID) throws IOException, UserNotFoundException {
-        UserDao userDao = new SqlUserDao();
+        UserDao userDao = SqlUserDao.getInstance();
 
         return userDao.getUserById(userID).getUserName();
     }

@@ -16,6 +16,7 @@ import java.util.LinkedList;
 
 public class SqlSubscribeDao implements SubscriptionDao {
     private static final Logger log = LogManager.getLogger(SqlSubscribeDao.class);
+    private static SqlSubscribeDao sqlSubscribeDao;
     private ConnectionPool connectionPool;
     private Collection<Integer> userSubs;
     private final String ADD_SUB = "INSERT INTO `users`.`subscribes` (`user_id`, `subscription`) VALUES (?, ?);";
@@ -24,15 +25,23 @@ public class SqlSubscribeDao implements SubscriptionDao {
     private final String REMOVE_SUB = "DELETE FROM `users`.`subscribes` WHERE `sub_id`=?;";
     private final String GET_FOLLOWERS = "SELECT user_id FROM `users`.`subscribes` WHERE subscription=?;";
 
-    public SqlSubscribeDao() {
-        if (connectionPool == null) {
-            synchronized (ConnectionPool.class) {
-                if (connectionPool == null) {
-                    log.debug("Initialize of con pool from " + SqlSubscribeDao.class);
-                    connectionPool = ConnectionPool.getInstance(
-                            "D:\\\\Программы\\\\SimpleSocialNet\\\\jdbc\\\\src\\\\main\\\\resources\\\\userData.properties");
+    public static SqlSubscribeDao getInstance() {
+        if (sqlSubscribeDao == null) {
+            synchronized (SqlPostDao.class) {
+                if(sqlSubscribeDao == null) {
+                    log.debug("gettting instance of " + SqlSubscribeDao.class);
+                    sqlSubscribeDao = new SqlSubscribeDao();
                 }
             }
+        }
+        return sqlSubscribeDao;
+    }
+
+    private SqlSubscribeDao() {
+        if(connectionPool==null) {
+            log.debug(SqlSubscribeDao.class + "constructor inited");
+            connectionPool = ConnectionPool.getInstance(
+                    "D:\\Программы\\SimpleSocialNet\\jdbc\\src\\main\\resources\\postData.properties");
         }
     }
 
@@ -75,7 +84,7 @@ public class SqlSubscribeDao implements SubscriptionDao {
 
     @Override
     public Collection<Post> getSubPosts(int userId) {
-        PostDao sqlPostDao = new SqlPostDao();
+        PostDao sqlPostDao = SqlPostDao.getInstance();
         userSubs = getSubIds(userId);
 
         Collection<Post> subPosts = new LinkedList<>();
