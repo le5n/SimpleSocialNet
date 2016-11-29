@@ -10,10 +10,10 @@ public class SqlSubscriptionDaoTest {
 
     @Test
     public void getSubIds() throws Exception{
-        SubscriptionDao subscriptionDao = new SqlSubscribeDao();
-        Collection<Integer> actualIds = subscriptionDao.getSubIds(6);
+        SubscriptionDao subscriptionDao = SqlSubscribeDao.getInstance();
+        Collection<Integer> actualIds = subscriptionDao.getSubIds(1);
         System.out.println(actualIds);
 
-        Assert.assertTrue(actualIds.contains(3));
+        Assert.assertTrue(actualIds.contains(2));
     }
 }

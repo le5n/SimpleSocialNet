@@ -32,8 +32,8 @@ public class SqlPostDao implements PostDao {
         if (localInstance == null) {
             synchronized (SqlPostDao.class) {
                 localInstance = sqlPostDao;
-                if(localInstance == null) {
-                    log.debug("gettting instance of SqlPostDao");
+                if (localInstance == null) {
+                    log.debug("getting instance of SqlPostDao");
                     sqlPostDao = new SqlPostDao();
                 }
             }
@@ -42,7 +42,7 @@ public class SqlPostDao implements PostDao {
     }
 
     private SqlPostDao() {
-        if(connectionPool == null) {
+        if (connectionPool == null) {
             log.debug("SqlPostDao constructor inited");
             connectionPool = ConnectionPool.getInstance(
                     "D:\\Программы\\SimpleSocialNet\\jdbc\\src\\main\\resources\\postData.properties");
@@ -78,18 +78,16 @@ public class SqlPostDao implements PostDao {
              PreparedStatement prepStPostData = connection.prepareStatement(GET_BY_POST_ID)) {
 
             prepStPostData.setInt(1, postId);
-            // TODO: 13.11.2016 try
-            ResultSet resultSet = prepStPostData.executeQuery();
-            while (resultSet.next()) {
-                post = new Post(
-                        resultSet.getInt("post_id"),
-                        resultSet.getInt("user_id"),
-                        resultSet.getString("post_text"),
-                        resultSet.getString("post_date")
-                );
+            try (ResultSet resultSet = prepStPostData.executeQuery()) {
+                while (resultSet.next()) {
+                    post = new Post(
+                            resultSet.getInt("post_id"),
+                            resultSet.getInt("user_id"),
+                            resultSet.getString("post_text"),
+                            resultSet.getString("post_date")
+                    );
+                }
             }
-            resultSet.close();
-
         } catch (InterruptedException | SQLException e) {
             e.printStackTrace();
         }
@@ -104,16 +102,16 @@ public class SqlPostDao implements PostDao {
              PreparedStatement prepStUserPosts = connection.prepareStatement(GET_POSTS_BY_USER_ID)) {
 
             prepStUserPosts.setInt(1, userId);
-            ResultSet resultSet = prepStUserPosts.executeQuery();
-            while (resultSet.next()) {
-                UserPosts.add(new Post(
-                        resultSet.getInt("post_id"),
-                        resultSet.getInt("user_id"),
-                        resultSet.getString("post_text"),
-                        resultSet.getString("post_date")
-                ));
+            try (ResultSet resultSet = prepStUserPosts.executeQuery()) {
+                while (resultSet.next()) {
+                    UserPosts.add(new Post(
+                            resultSet.getInt("post_id"),
+                            resultSet.getInt("user_id"),
+                            resultSet.getString("post_text"),
+                            resultSet.getString("post_date")
+                    ));
+                }
             }
-
         } catch (InterruptedException | SQLException e) {
             e.printStackTrace();
         }
@@ -122,18 +120,17 @@ public class SqlPostDao implements PostDao {
 
     @Override
     public void addPost(String postText, int userId) {
-        try(Connection connection = connectionPool.getConnection();
-            PreparedStatement prepSt = connection.prepareStatement(ADD_POST)) {
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement prepSt = connection.prepareStatement(ADD_POST)) {
             LocalDateTime localDate = LocalDateTime.of(LocalDate.now(), LocalTime.now());
 
-
             prepSt.setInt(1, userId);
-            prepSt.setString(2,localDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy : hh - mm")));
+            prepSt.setString(2, localDate.format(DateTimeFormatter.ofPattern("dd-MM-yyyy : hh - mm")));
             prepSt.setString(3, postText);
 
             prepSt.execute();
 
-        }catch (InterruptedException | SQLException e) {
+        } catch (InterruptedException | SQLException e) {
             e.printStackTrace();
         }
     }

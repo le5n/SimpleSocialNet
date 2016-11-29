@@ -2315,3 +2315,20 @@ java.lang.InterruptedException: null
 2016-11-29T02:10:32,004 [DEBUG] (SqlPostDao.java:46) - SqlPostDao constructor inited
 2016-11-29T02:10:32,016 [DEBUG] (SqlSubscribeDao.java:32) - gettting instance of class sql.SqlSubscribeDao
 2016-11-29T02:10:32,017 [DEBUG] (SqlSubscribeDao.java:42) - class sql.SqlSubscribeDaoconstructor inited
+2016-11-29T02:47:34,322 [DEBUG] (SqlUserDao.java:33) - gettting instance of class sql.SqlUserDao
+2016-11-29T02:47:34,325 [DEBUG] (SqlUserDao.java:43) - class sql.SqlUserDao constructor inited
+2016-11-29T02:47:34,332 [DEBUG] (ConnectionPool.java:26) - instance of connection pool inited
+2016-11-29T02:47:52,042 [DEBUG] (SqlPostDao.java:36) - gettting instance of SqlPostDao
+2016-11-29T02:47:52,047 [DEBUG] (SqlPostDao.java:46) - SqlPostDao constructor inited
+2016-11-29T02:47:52,050 [DEBUG] (ConnectionPool.java:26) - instance of connection pool inited
+2016-11-29T02:47:52,918 [DEBUG] (SqlSubscribeDao.java:32) - gettting instance of class sql.SqlSubscribeDao
+2016-11-29T02:47:52,919 [DEBUG] (SqlSubscribeDao.java:42) - class sql.SqlSubscribeDaoconstructor inited
+2016-11-29T02:47:52,928 [DEBUG] (SqlUserDao.java:33) - gettting instance of class sql.SqlUserDao
+2016-11-29T02:47:52,928 [DEBUG] (SqlUserDao.java:43) - class sql.SqlUserDao constructor inited
+2016-11-29T02:49:27,232 [DEBUG] (SqlPostDao.java:36) - gettting instance of SqlPostDao
+2016-11-29T02:49:27,236 [DEBUG] (SqlPostDao.java:46) - SqlPostDao constructor inited
+2016-11-29T02:49:27,238 [DEBUG] (ConnectionPool.java:26) - instance of connection pool inited
+2016-11-29T02:49:27,826 [DEBUG] (SqlSubscribeDao.java:32) - gettting instance of class sql.SqlSubscribeDao
+2016-11-29T02:49:27,827 [DEBUG] (SqlSubscribeDao.java:42) - class sql.SqlSubscribeDaoconstructor inited
+2016-11-29T02:49:27,831 [DEBUG] (SqlUserDao.java:33) - gettting instance of class sql.SqlUserDao
+2016-11-29T02:49:27,831 [DEBUG] (SqlUserDao.java:43) - class sql.SqlUserDao constructor inited

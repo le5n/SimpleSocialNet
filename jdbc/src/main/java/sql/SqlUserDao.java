@@ -39,7 +39,7 @@ public class SqlUserDao implements UserDao {
     }
 
     private SqlUserDao() {
-        if(connectionPool==null) {
+        if (connectionPool == null) {
             log.debug(SqlUserDao.class + " constructor inited");
             connectionPool = ConnectionPool.getInstance(
                     "D:\\Программы\\SimpleSocialNet\\jdbc\\src\\main\\resources\\postData.properties");
@@ -99,16 +99,17 @@ public class SqlUserDao implements UserDao {
              PreparedStatement prepStUser = connection.prepareStatement(GET_USER_BY_ID)) {
 
             prepStUser.setInt(1, id);
-            ResultSet resultSet = prepStUser.executeQuery();
-            while (resultSet.next()) {
-                user = new User(
-                        resultSet.getInt("id"),
-                        resultSet.getString("name"),
-                        resultSet.getString("lastname"),
-                        resultSet.getString("email"),
-                        resultSet.getString("password"),
-                        resultSet.getString("username")
-                );
+            try (ResultSet resultSet = prepStUser.executeQuery()) {
+                while (resultSet.next()) {
+                    user = new User(
+                            resultSet.getInt("id"),
+                            resultSet.getString("name"),
+                            resultSet.getString("lastname"),
+                            resultSet.getString("email"),
+                            resultSet.getString("password"),
+                            resultSet.getString("username")
+                    );
+                }
             }
 
         } catch (InterruptedException | SQLException e) {
@@ -126,16 +127,17 @@ public class SqlUserDao implements UserDao {
              PreparedStatement prepStUser = connection.prepareStatement(GET_USER_BY_EMAIL)) {
 
             prepStUser.setString(1, email);
-            ResultSet resultSet = prepStUser.executeQuery();
-            while (resultSet.next()) {
-                user = new User(
-                        resultSet.getInt("id"),
-                        resultSet.getString("name"),
-                        resultSet.getString("lastname"),
-                        resultSet.getString("email"),
-                        resultSet.getString("password"),
-                        resultSet.getString("username")
-                );
+            try (ResultSet resultSet = prepStUser.executeQuery()) {
+                while (resultSet.next()) {
+                    user = new User(
+                            resultSet.getInt("id"),
+                            resultSet.getString("name"),
+                            resultSet.getString("lastname"),
+                            resultSet.getString("email"),
+                            resultSet.getString("password"),
+                            resultSet.getString("username")
+                    );
+                }
             }
         } catch (InterruptedException | SQLException e) {
             log.error("Cannot get user by email, where email = " + email, e);

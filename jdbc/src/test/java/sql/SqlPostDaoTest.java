@@ -8,7 +8,7 @@ import java.util.Collection;
 
 public class SqlPostDaoTest {
     private Post expectedPost = new Post(1,6,"hello world", "05.05.05");
-    private SqlPostDao sqlPostDao = new SqlPostDao();
+    private SqlPostDao sqlPostDao = SqlPostDao.getInstance();
 
     @Test
     public void getAll() throws Exception{
