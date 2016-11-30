@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class SqlUserDao implements UserDao {
-    private Collection<User> allUsers = new ArrayList<>();
+
     private static final Logger log = LogManager.getLogger(SqlUserDao.class);
     private static SqlUserDao sqlUserDao;
     private static ConnectionPool connectionPool;
@@ -68,6 +68,7 @@ public class SqlUserDao implements UserDao {
 
     @Override
     public Collection<User> getAll() {
+         Collection<User> allUsers = new ArrayList<>();
         try (Connection connection = connectionPool.getConnection();
              Statement statement = connection.createStatement();
              ResultSet resultSet = statement.executeQuery(GET_ALL_USERS)) {

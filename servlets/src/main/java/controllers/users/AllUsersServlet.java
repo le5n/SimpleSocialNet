@@ -23,6 +23,5 @@ public class AllUsersServlet extends HttpServlet {
         request.setAttribute(USERS, users);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/page/allUsers.jsp");
         requestDispatcher.forward(request, response);
-        users.removeAll(users);
     }
 }
