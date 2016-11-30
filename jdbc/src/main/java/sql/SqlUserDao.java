@@ -24,7 +24,6 @@ public class SqlUserDao implements UserDao {
     private static final String GET_USER_BY_EMAIL = "SELECT * FROM users.users WHERE email=?";
     private static final String ADD_USER = "INSERT INTO `users`.`users` (`name`, `lastname`, `email`, `password`, `username`) " +
             "VALUES (?, ?, ?, ?, ?);";
-    private final String CHANGE_USERNAME = "UPDATE `users`.`users` SET `username`=? WHERE `email`=?;";
 
     public static SqlUserDao getInstance() {
         if (sqlUserDao == null) {
@@ -143,18 +142,5 @@ public class SqlUserDao implements UserDao {
             log.error("Cannot get user by email, where email = " + email, e);
         }
         return user;
-    }
-
-    //// TODO: 28.11.2016 add this ability to the app
-    @Override
-    public void changeUsername(String email, String newUsername) throws UserNotFoundException {
-        try (Connection connection = connectionPool.getConnection();
-             PreparedStatement prepSt = connection.prepareStatement(CHANGE_USERNAME)) {
-            prepSt.setString(1, newUsername);
-            prepSt.setString(2, email);
-            prepSt.execute();
-        } catch (InterruptedException | SQLException e) {
-            log.error("Cannot change username where email=" + email, e);
-        }
     }
 }

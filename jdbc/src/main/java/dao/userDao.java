@@ -11,5 +11,4 @@ public interface UserDao {
     Collection<User> getAll();
     User getUserById (int id) throws UserNotFoundException;
     User getUserByEmail (String email) throws UserNotFoundException;
-    void changeUsername(String email, String newUsername) throws UserNotFoundException;
 }
