@@ -37,6 +37,9 @@ public class LoginServlet extends HttpServlet {
                 session = request.getSession(true);
                 session.setAttribute(KEY, new Object());
                 session.setAttribute(USER_ID, user.getId());
+                if(session.getAttribute("lang")==null) {
+                    session.setAttribute("lang", "ru_RU");
+                }
 
                 log.info("user logged in, userId = " +user.getId());
 

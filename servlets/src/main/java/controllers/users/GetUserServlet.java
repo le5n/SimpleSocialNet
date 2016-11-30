@@ -17,6 +17,7 @@ import java.util.Collection;
 
 @WebServlet("/GetUserServlet/")
 public class GetUserServlet extends HttpServlet {
+    private SubscriptionDao subscriptionDao = SqlSubscribeDao.getInstance();
     private static final String POSTS = "anotherPosts";
     private static final String PAGE_ID = "userID";
     private static final String SUB_BUTTON = "subButton";
@@ -26,40 +27,54 @@ public class GetUserServlet extends HttpServlet {
 
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        PostDao postDao = SqlPostDao.getInstance();
-        SubscriptionDao subscriptionDao = SqlSubscribeDao.getInstance();
-
         HttpSession session = request.getSession();
 
         int currentUserId = (int) session.getAttribute(CURRENT_USER_ID);
         int pageId = Integer.parseInt(request.getParameter("userHref"));
+        String lang = (String) session.getAttribute("lang");
 
         if (currentUserId == pageId) {
             forward("/page/", request, response);
         } else {
-            Collection<Integer> otherSubscribes = subscriptionDao.getSubIds(pageId);
-            Collection<Integer> otherFollowers = subscriptionDao.getFollowers(pageId);
-
-            Collection<Post> posts = postDao.getPostsByUserId(pageId);
+            setPageInfo(pageId, request);
             Collection<Integer> subscribes = subscriptionDao.getSubIds(currentUserId);
 
-            if (subscribes.contains(pageId)) {
-                request.setAttribute(SUB_BUTTON, true);
-            } else {
-                request.setAttribute(SUB_BUTTON, false);
-            }
-
-            request.setAttribute(POSTS, posts);
-            request.setAttribute(PAGE_ID, pageId);
-            request.setAttribute(OTHER_SUBSCRIBES, otherSubscribes);
-            request.setAttribute(OTHER_FOLLOWERS, otherFollowers);
+            boolean isSubscribed = subscribes.contains(pageId);
+            setSubButton(lang, isSubscribed, request);
 
             forward("/page/otherUserPage.jsp", request, response);
         }
     }
-
-
     private void forward(String path, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher(path).forward(request, response);
+    }
+
+    private void setPageInfo(int pageId, HttpServletRequest request) {
+        PostDao postDao = SqlPostDao.getInstance();
+
+        Collection<Integer> otherSubscribes = subscriptionDao.getSubIds(pageId);
+        Collection<Integer> otherFollowers = subscriptionDao.getFollowers(pageId);
+
+        Collection<Post> posts = postDao.getPostsByUserId(pageId);
+
+        request.setAttribute(POSTS, posts);
+        request.setAttribute(PAGE_ID, pageId);
+        request.setAttribute(OTHER_SUBSCRIBES, otherSubscribes);
+        request.setAttribute(OTHER_FOLLOWERS, otherFollowers);
+    }
+
+    private void setSubButton(String lang, boolean isSubscribed, HttpServletRequest request) {
+        if (isSubscribed) {
+            if (lang.equals("en_US"))
+                request.setAttribute(SUB_BUTTON, "unsubscribe");
+            else
+                request.setAttribute(SUB_BUTTON, "отписаться");
+        } else {
+            if (lang.equals("ru_RU"))
+                request.setAttribute(SUB_BUTTON, "подписаться");
+            else {
+                request.setAttribute(SUB_BUTTON, "subscribe");
+            }
+        }
     }
 }

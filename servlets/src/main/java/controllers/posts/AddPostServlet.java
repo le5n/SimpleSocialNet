@@ -25,7 +25,7 @@ public class AddPostServlet extends HttpServlet {
         String postText = request.getParameter("newPost");
         if (postText.length() > POST_LENGTH) {
             PrintWriter out = response.getWriter();
-            forward("page/errorPost.html", request, response);
+            forward("page/errorPost.jsp", request, response);
         } else {
             HttpSession session = request.getSession();
             int userId = (int) session.getAttribute(USER_ID);
