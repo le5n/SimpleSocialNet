@@ -43,16 +43,16 @@ public class LoginServlet extends HttpServlet {
 
                 log.info("user logged in, userId = " +user.getId());
 
-                forward("/login/successLogin.html", request, response);
+                forward("/login/successLogin.jsp", request, response);
             } else {
-                forward("/login/error.html", request, response);
+                forward("/login/error.jsp", request, response);
             }
         } catch (UserNotFoundException e) {
             log.warn("user failed to login", e);
             forward("/login/login.jsp", request, response);
         } catch (NullPointerException e) {
             log.warn("some fields were left empty in login", e);
-            forward("/login/error.html", request, response);
+            forward("/login/error.jsp", request, response);
         }
     }
 

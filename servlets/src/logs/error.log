@@ -2549,3 +2549,17 @@ java.lang.InterruptedException: null
 2016-11-30T14:38:14,337 [DEBUG] (SqlPostDao.java:47) - SqlPostDao constructor inited
 2016-11-30T14:38:14,347 [DEBUG] (SqlSubscribeDao.java:33) - gettting instance of class sql.SqlSubscribeDao
 2016-11-30T14:38:14,348 [DEBUG] (SqlSubscribeDao.java:43) - class sql.SqlSubscribeDaoconstructor inited
+2016-11-30T17:30:58,492 [INFO ] (LogoutServlet.java:22) - session invalidate
+2016-11-30T17:51:16,031 [DEBUG] (SqlUserDao.java:33) - gettting instance of class sql.SqlUserDao
+2016-11-30T17:51:16,047 [DEBUG] (SqlUserDao.java:43) - class sql.SqlUserDao constructor inited
+2016-11-30T17:51:16,049 [DEBUG] (ConnectionPool.java:26) - instance of connection pool inited
+2016-11-30T17:51:16,650 [INFO ] (LoginServlet.java:44) - user logged in, userId = 6
+2016-11-30T17:51:18,282 [DEBUG] (SqlPostDao.java:36) - getting instance of SqlPostDao
+2016-11-30T17:51:18,283 [DEBUG] (SqlPostDao.java:47) - SqlPostDao constructor inited
+2016-11-30T17:51:18,288 [DEBUG] (SqlSubscribeDao.java:33) - gettting instance of class sql.SqlSubscribeDao
+2016-11-30T17:51:18,288 [DEBUG] (SqlSubscribeDao.java:43) - class sql.SqlSubscribeDaoconstructor inited
+2016-11-30T17:51:47,338 [INFO ] (LogoutServlet.java:22) - session invalidate
+2016-11-30T17:51:54,715 [INFO ] (LogoutServlet.java:22) - session invalidate
+2016-11-30T17:53:07,548 [INFO ] (LoginServlet.java:44) - user logged in, userId = 11
+2016-11-30T17:53:17,476 [INFO ] (LogoutServlet.java:22) - session invalidate
+2016-11-30T17:53:29,980 [INFO ] (LoginServlet.java:44) - user logged in, userId = 9

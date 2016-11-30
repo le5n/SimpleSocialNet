@@ -31,7 +31,7 @@ public class AddUserServlet extends HttpServlet {
 
         for (String arg : args) {
             if (arg.equals(""))
-                forward("/registration/error.html", request, response);
+                forward("/registration/error.jsp", request, response);
         }
         if (isValid(email, password, checkPas)) {
             User user = new User(1, name, lastName, email, password, userName);
@@ -41,10 +41,10 @@ public class AddUserServlet extends HttpServlet {
             } catch (UserAlreadyExistsException e) {
                 log.warn("user cannot register again", e);
             }
-            forward("/registration/success.html", request, response);
+            forward("/registration/success.jsp", request, response);
         } else {
             log.error("user cannot register beacuse of incorrect email or password repeat");
-            forward("/registration/error.html", request, response);
+            forward("/registration/error.jsp", request, response);
         }
 
     }

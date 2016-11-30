@@ -29,7 +29,7 @@
         <input type="password" class="input-block-level" placeholder="${password}" name="password"> <br/>
         <button class="btn btn-large btn-primary" type="submit">${signIn}</button>
     </form>
-    <form action="/registration/register.html">
+    <form action="/registration/register.jsp">
         <strong>${register}</strong> <br> <br>
         <button class="btn btn-large btn-primary" type="submit">${signUp}</button>
     </form>

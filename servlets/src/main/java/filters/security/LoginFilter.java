@@ -18,7 +18,7 @@ public class LoginFilter extends HttpFilter {
         HttpSession session = request.getSession();
 
         if (session.getAttribute(KEY)!= null){
-            forward("/login/alreadyLoged.html", request,response);
+            forward("/login/alreadyLoged.jsp", request,response);
         }
         else{
             chain.doFilter(request,response);
