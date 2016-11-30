@@ -6,3 +6,19 @@
 2016-11-30T23:59:57,800 [DEBUG] (SqlPostDao.java:45) - SqlPostDao constructor inited
 2016-11-30T23:59:57,807 [DEBUG] (SqlSubscribeDao.java:33) - gettting instance of class sql.SqlSubscribeDao
 2016-11-30T23:59:57,807 [DEBUG] (SqlSubscribeDao.java:43) - class sql.SqlSubscribeDaoconstructor inited
+2016-12-01T00:03:51,523 [DEBUG] (SqlUserDao.java:32) - gettting instance of class sql.SqlUserDao
+2016-12-01T00:03:51,549 [DEBUG] (SqlUserDao.java:42) - class sql.SqlUserDao constructor inited
+2016-12-01T00:03:51,553 [DEBUG] (ConnectionPool.java:26) - instance of connection pool inited
+2016-12-01T00:03:52,438 [INFO ] (LoginServlet.java:44) - user logged in, userId = 19
+2016-12-01T00:03:55,125 [DEBUG] (SqlPostDao.java:35) - getting instance of SqlPostDao
+2016-12-01T00:03:55,126 [DEBUG] (SqlPostDao.java:45) - SqlPostDao constructor inited
+2016-12-01T00:03:55,134 [DEBUG] (SqlSubscribeDao.java:33) - gettting instance of class sql.SqlSubscribeDao
+2016-12-01T00:03:55,134 [DEBUG] (SqlSubscribeDao.java:43) - class sql.SqlSubscribeDaoconstructor inited
+2016-12-01T00:09:18,387 [DEBUG] (SqlUserDao.java:32) - gettting instance of class sql.SqlUserDao
+2016-12-01T00:09:18,433 [DEBUG] (SqlUserDao.java:42) - class sql.SqlUserDao constructor inited
+2016-12-01T00:09:18,441 [DEBUG] (ConnectionPool.java:26) - instance of connection pool inited
+2016-12-01T00:09:20,628 [INFO ] (LoginServlet.java:44) - user logged in, userId = 19
+2016-12-01T00:09:24,054 [DEBUG] (SqlPostDao.java:35) - getting instance of SqlPostDao
+2016-12-01T00:09:24,056 [DEBUG] (SqlPostDao.java:45) - SqlPostDao constructor inited
+2016-12-01T00:09:24,071 [DEBUG] (SqlSubscribeDao.java:33) - gettting instance of class sql.SqlSubscribeDao
+2016-12-01T00:09:24,072 [DEBUG] (SqlSubscribeDao.java:43) - class sql.SqlSubscribeDaoconstructor inited

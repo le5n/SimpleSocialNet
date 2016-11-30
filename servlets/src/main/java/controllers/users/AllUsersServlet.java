@@ -19,7 +19,9 @@ public class AllUsersServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         UserDao userDao = SqlUserDao.getInstance();
+
         Collection<User> users = userDao.getAll();
+
         request.setAttribute(USERS, users);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/page/allUsers.jsp");
         requestDispatcher.forward(request, response);
