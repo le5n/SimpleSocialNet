@@ -1,6 +1,7 @@
 package controllers.users;
 
 import dao.UserDao;
+import social.User;
 import sql.SqlUserDao;
 
 import javax.servlet.RequestDispatcher;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Collection;
 
 @WebServlet("/GetAllUsers")
 public class AllUsersServlet extends HttpServlet {
@@ -17,9 +19,10 @@ public class AllUsersServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         UserDao userDao = SqlUserDao.getInstance();
-
-        request.setAttribute(USERS, userDao.getAll());
+        Collection<User> users = userDao.getAll();
+        request.setAttribute(USERS, users);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/page/allUsers.jsp");
         requestDispatcher.forward(request, response);
+        users.removeAll(users);
     }
 }

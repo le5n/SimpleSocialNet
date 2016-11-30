@@ -44,12 +44,6 @@ public class User {
         return result;
     }
 
-    // TODO: 29.11.2016 fix
-    @Override
-    public String toString() {
-        return userName;
-    }
-
     public String getName() {
         return name;
     }

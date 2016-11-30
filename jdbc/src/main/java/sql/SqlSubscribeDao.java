@@ -108,7 +108,6 @@ public class SqlSubscribeDao implements SubscriptionDao {
     }
 
     private Collection<Integer> count(String that, int userId) {
-        // TODO: 29.11.2016 pattern strategy
         String prepSt;
         if (that.equals("followers")) {
             prepSt = GET_FOLLOWERS;

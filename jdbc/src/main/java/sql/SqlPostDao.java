@@ -28,7 +28,6 @@ public class SqlPostDao implements PostDao {
     private static final String ADD_POST = "INSERT INTO `posts`.`posts` (`user_id`, `post_date`, `post_text`) VALUES (?,?,?);";
 
 
-    // TODO: 29.11.2016 check it
     public static SqlPostDao getInstance() {
         if (sqlPostDao == null) {
             synchronized (SqlPostDao.class) {
@@ -41,7 +40,6 @@ public class SqlPostDao implements PostDao {
         return sqlPostDao;
     }
 
-    // TODO: 29.11.2016 File ? to make relative path
     private SqlPostDao() {
         if (connectionPool == null) {
             log.debug("SqlPostDao constructor inited");
