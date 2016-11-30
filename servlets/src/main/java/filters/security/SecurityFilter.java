@@ -21,7 +21,7 @@ public class SecurityFilter extends HttpFilter {
         if (session.getAttribute(KEY) != null) {
             chain.doFilter(request, response);
         } else {
-            forward("/login/login.html", request,response);
+            forward("/login/login.jsp", request,response);
         }
     }
 
@@ -29,5 +29,7 @@ public class SecurityFilter extends HttpFilter {
         request.getRequestDispatcher(path).forward(request, response);
     }
 
+    @Override
+    public void destroy() {}
 }
 

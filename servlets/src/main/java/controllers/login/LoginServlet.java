@@ -16,7 +16,6 @@ import java.io.IOException;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 
-//// TODO: 21.11.2016  вылетает если ввести непоняно какой логин и пароль (null pointer exception)
 @WebServlet(urlPatterns = "/Login")
 public class LoginServlet extends HttpServlet {
     private static final String KEY = "key";
@@ -41,13 +40,13 @@ public class LoginServlet extends HttpServlet {
 
                 log.info("user logged in, userId = " +user.getId());
 
-                forward("/page/successLogin.html", request, response);
+                forward("/login/successLogin.html", request, response);
             } else {
                 forward("/login/error.html", request, response);
             }
         } catch (UserNotFoundException e) {
             log.warn("user failed to login", e);
-            forward("/login/login.html", request, response);
+            forward("/login/login.jsp", request, response);
         } catch (NullPointerException e) {
             log.warn("some fields were left empty in login", e);
             forward("/login/error.html", request, response);

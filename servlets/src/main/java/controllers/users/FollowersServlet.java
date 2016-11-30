@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Collection;
-import java.util.LinkedList;
 
 @WebServlet("/followersList/")
 public class FollowersServlet extends HttpServlet {
@@ -27,14 +26,13 @@ public class FollowersServlet extends HttpServlet {
         HttpSession session = req.getSession();
         Collection<Integer> followers;
 
-        if (req.getParameter("userID")!=null) {
+        if (req.getParameter("userID") != null) {
             int pageId = Integer.parseInt(req.getParameter(PAGE_ID));
             followers = subscriptionDao.getFollowers(pageId);
 
         } else {
             int userId = (int) session.getAttribute(USER_ID);
             followers = subscriptionDao.getFollowers(userId);
-
         }
         req.setAttribute(FOLLOWERS, followers);
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("/page/followersList.jsp");

@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Collection;
-import java.util.LinkedList;
 
 @WebServlet("/subscribeList/")
 public class SubscriptionsServlet extends HttpServlet {
@@ -27,11 +26,10 @@ public class SubscriptionsServlet extends HttpServlet {
 
         Collection<Integer> subIds;
 
-        if(req.getParameter(PAGE_ID)!=null) {
+        if (req.getParameter(PAGE_ID) != null) {
             int pageId = Integer.parseInt(req.getParameter(PAGE_ID));
             subIds = subscriptionDao.getSubIds(pageId);
-        }
-        else {
+        } else {
             int userId = (int) session.getAttribute(USER_ID);
             subIds = subscriptionDao.getSubIds(userId);
         }

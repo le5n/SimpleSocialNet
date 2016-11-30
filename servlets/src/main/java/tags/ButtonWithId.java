@@ -5,7 +5,6 @@ import javax.servlet.jsp.tagext.TagSupport;
 import java.io.IOException;
 
 public class ButtonWithId extends TagSupport {
-
     private String userId;
 
     public void setUserId(String userId) {

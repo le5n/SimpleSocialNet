@@ -22,17 +22,17 @@ public class SqlPostDao implements PostDao {
 
     private static Logger log = LogManager.getLogger(SqlPostDao.class);
 
-    private final String GET_ALL_POSTS = "SELECT * FROM posts.posts;";
-    private final String GET_BY_POST_ID = "SELECT * FROM posts.posts WHERE post_id=?";
-    private final String GET_POSTS_BY_USER_ID = "SELECT * FROM posts.posts WHERE user_id=?";
-    private final String ADD_POST = "INSERT INTO `posts`.`posts` (`user_id`, `post_date`, `post_text`) VALUES (?,?,?);";
+    private static final String GET_ALL_POSTS = "SELECT * FROM posts.posts;";
+    private static final String GET_BY_POST_ID = "SELECT * FROM posts.posts WHERE post_id=?";
+    private static final String GET_POSTS_BY_USER_ID = "SELECT * FROM posts.posts WHERE user_id=?";
+    private static final String ADD_POST = "INSERT INTO `posts`.`posts` (`user_id`, `post_date`, `post_text`) VALUES (?,?,?);";
 
+
+    // TODO: 29.11.2016 check it
     public static SqlPostDao getInstance() {
-        SqlPostDao localInstance = sqlPostDao;
-        if (localInstance == null) {
+        if (sqlPostDao == null) {
             synchronized (SqlPostDao.class) {
-                localInstance = sqlPostDao;
-                if (localInstance == null) {
+                if (sqlPostDao == null) {
                     log.debug("getting instance of SqlPostDao");
                     sqlPostDao = new SqlPostDao();
                 }
@@ -41,6 +41,7 @@ public class SqlPostDao implements PostDao {
         return sqlPostDao;
     }
 
+    // TODO: 29.11.2016 File ? to make relative path
     private SqlPostDao() {
         if (connectionPool == null) {
             log.debug("SqlPostDao constructor inited");
@@ -63,7 +64,6 @@ public class SqlPostDao implements PostDao {
                         )
                 );
             }
-            resultSet.close();
         } catch (SQLException | InterruptedException e) {
             e.printStackTrace();
         }

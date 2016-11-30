@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.util.Collection;
 
 public class AllUsers extends TagSupport {
-
     private Collection<User> users;
 
     public void setUsers(Collection<User> users) {
@@ -28,7 +27,7 @@ public class AllUsers extends TagSupport {
     public static String getAllUsers(Collection<User> users) throws IOException {
         StringBuilder out = new StringBuilder();
         for (User user : users)
-           out.append("<a href=\"/GetUserServlet/?userHref=").append(user.getId()).append("\">").append(user).append("</a>").append("<br/>");
+            out.append("<a href=\"/GetUserServlet/?userHref=").append(user.getId()).append("\">").append(user).append("</a>").append("<br/>");
         return out.toString();
     }
 }

@@ -1,6 +1,8 @@
 package controllers.users;
 
 import exceptions.UserAlreadyExistsException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import social.User;
 import sql.SqlUserDao;
 
@@ -10,9 +12,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 @WebServlet(urlPatterns = "/AddUserServlet")
 public class AddUserServlet extends HttpServlet {
@@ -34,7 +33,7 @@ public class AddUserServlet extends HttpServlet {
             if (arg.equals(""))
                 forward("/registration/error.html", request, response);
         }
-        if (checkPas.equals(password) && correctEmail(email)) {
+        if (isValid(email, password, checkPas)) {
             User user = new User(1, name, lastName, email, password, userName);
             try {
                 sqlUserDao.addUser(user);
@@ -50,11 +49,15 @@ public class AddUserServlet extends HttpServlet {
 
     }
 
-    private void forward(String path, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher(path).forward(request, response);
+    private boolean isValid(String email, String password, String checkPas) {
+        return checkPas.equals(password) && correctEmail(email);
     }
 
     private boolean correctEmail(String email) {
         return email.matches("\\w{1,25}[@]\\w{1,10}\\.\\w{2,3}");
+    }
+
+    private void forward(String path, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher(path).forward(request, response);
     }
 }

@@ -11,7 +11,6 @@ import java.util.Collections;
 import java.util.List;
 
 public class Posts extends TagSupport {
-
     private Collection<Post> posts;
 
     public void setPosts(Collection<Post> posts) {

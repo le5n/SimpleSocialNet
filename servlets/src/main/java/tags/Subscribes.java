@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.util.Collection;
 
 public class Subscribes extends TagSupport {
-
     private Collection<Integer> subscribes;
 
     public void setSubscribes(Collection<Integer> subscribes) {

@@ -16,7 +16,6 @@ import java.util.Comparator;
 import java.util.List;
 
 public class SubPosts extends TagSupport {
-
     private Collection<Post> posts;
 
     public void setPosts(Collection<Post> posts) {

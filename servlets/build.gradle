@@ -8,5 +8,8 @@ dependencies {
     // Tomcat internal libraries
     providedCompile 'org.apache.tomcat:tomcat-api:+'
     providedCompile 'org.apache.tomcat:tomcat-jsp-api:+'
+    compile group: 'javax.servlet', name: 'javax.servlet-api', version: '3.0.1'
+    compile group: 'javax.servlet', name: 'jstl', version: '1.2'
+    compile group: 'javax.servlet.jsp', name: 'jsp-api', version: '2.0'
 }
 

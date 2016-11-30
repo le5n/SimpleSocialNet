@@ -14,15 +14,15 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class SqlUserDao implements UserDao {
-
     private Collection<User> allUsers = new ArrayList<>();
     private static final Logger log = LogManager.getLogger(SqlUserDao.class);
     private static SqlUserDao sqlUserDao;
     private static ConnectionPool connectionPool;
-    private final String GET_ALL_USERS = "SELECT * FROM users.users;";
-    private final String GET_USER_BY_ID = "SELECT * FROM users.users WHERE id=?";
-    private final String GET_USER_BY_EMAIL = "SELECT * FROM users.users WHERE email=?";
-    private final String ADD_USER = "INSERT INTO `users`.`users` (`name`, `lastname`, `email`, `password`, `username`) " +
+
+    private static final String GET_ALL_USERS = "SELECT * FROM users.users;";
+    private static final String GET_USER_BY_ID = "SELECT * FROM users.users WHERE id=?";
+    private static final String GET_USER_BY_EMAIL = "SELECT * FROM users.users WHERE email=?";
+    private static final String ADD_USER = "INSERT INTO `users`.`users` (`name`, `lastname`, `email`, `password`, `username`) " +
             "VALUES (?, ?, ?, ?, ?);";
     private final String CHANGE_USERNAME = "UPDATE `users`.`users` SET `username`=? WHERE `email`=?;";
 

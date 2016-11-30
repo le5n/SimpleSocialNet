@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebFilter(urlPatterns = {"/login/login.html"})
+@WebFilter(urlPatterns = {"/login/login.jsp"})
 public class LoginFilter extends HttpFilter {
     private static final String KEY = "key";
     @Override
@@ -27,4 +27,7 @@ public class LoginFilter extends HttpFilter {
     private void forward(String path, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.getRequestDispatcher(path).forward(request, response);
     }
+
+    @Override
+    public void destroy() {    }
 }

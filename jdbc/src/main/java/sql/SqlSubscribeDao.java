@@ -19,16 +19,17 @@ public class SqlSubscribeDao implements SubscriptionDao {
     private static SqlSubscribeDao sqlSubscribeDao;
     private ConnectionPool connectionPool;
     private Collection<Integer> userSubs;
-    private final String ADD_SUB = "INSERT INTO `users`.`subscribes` (`user_id`, `subscription`) VALUES (?, ?);";
-    private final String FIND_SUB_ID = "SELECT * FROM users.subscribes WHERE user_id=? AND subscription=?;";
-    private final String GET_SUB_IDS = "SELECT subscription FROM `users`.`subscribes` WHERE user_id=?;";
-    private final String REMOVE_SUB = "DELETE FROM `users`.`subscribes` WHERE `sub_id`=?;";
-    private final String GET_FOLLOWERS = "SELECT user_id FROM `users`.`subscribes` WHERE subscription=?;";
+
+    private static final String ADD_SUB = "INSERT INTO `users`.`subscribes` (`user_id`, `subscription`) VALUES (?, ?);";
+    private static final String FIND_SUB_ID = "SELECT * FROM users.subscribes WHERE user_id=? AND subscription=?;";
+    private static final String GET_SUB_IDS = "SELECT subscription FROM `users`.`subscribes` WHERE user_id=?;";
+    private static final String REMOVE_SUB = "DELETE FROM `users`.`subscribes` WHERE `sub_id`=?;";
+    private static final String GET_FOLLOWERS = "SELECT user_id FROM `users`.`subscribes` WHERE subscription=?;";
 
     public static SqlSubscribeDao getInstance() {
         if (sqlSubscribeDao == null) {
             synchronized (SqlPostDao.class) {
-                if(sqlSubscribeDao == null) {
+                if (sqlSubscribeDao == null) {
                     log.debug("gettting instance of " + SqlSubscribeDao.class);
                     sqlSubscribeDao = new SqlSubscribeDao();
                 }
@@ -38,7 +39,7 @@ public class SqlSubscribeDao implements SubscriptionDao {
     }
 
     private SqlSubscribeDao() {
-        if(connectionPool==null) {
+        if (connectionPool == null) {
             log.debug(SqlSubscribeDao.class + "constructor inited");
             connectionPool = ConnectionPool.getInstance(
                     "D:\\Программы\\SimpleSocialNet\\jdbc\\src\\main\\resources\\postData.properties");
@@ -64,7 +65,7 @@ public class SqlSubscribeDao implements SubscriptionDao {
             delete.execute();
 
         } catch (InterruptedException | SQLException e) {
-            log.error("Cannot unsubscribe from " +subId + " by " + userId, e);
+            log.error("Cannot unsubscribe from " + subId + " by " + userId, e);
         }
     }
 
@@ -106,9 +107,10 @@ public class SqlSubscribeDao implements SubscriptionDao {
         return count("followers", userId);
     }
 
-    private Collection<Integer> count(String what, int userId) {
+    private Collection<Integer> count(String that, int userId) {
+        // TODO: 29.11.2016 pattern strategy
         String prepSt;
-        if (what.equals("followers")) {
+        if (that.equals("followers")) {
             prepSt = GET_FOLLOWERS;
         } else {
             prepSt = GET_SUB_IDS;
