@@ -15,11 +15,10 @@ public class EncodingFilter extends HttpFilter {
     protected void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
         response.setContentType("text/html; charset=utf-8");
         response.setCharacterEncoding("UTF-8");
-        chain.doFilter(request,response);
+        chain.doFilter(request, response);
     }
 
     @Override
     public void destroy() {
-
     }
 }

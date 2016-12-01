@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebFilter(urlPatterns = {"/page/successLogin.jsp", "/page/allUsers.jsp","/page/uploadPhoto.html", "/page/", "/page", "/page/userPage.jsp","/page/otherUserPage.jsp" ,"/"})
+@WebFilter(urlPatterns = {"/login/successLogin.jsp","/login/alreadyLoged.jsp" ,"/page/allUsers.jsp",
+        "/page/", "/page", "/page/userPage.jsp","/page/otherUserPage.jsp" , "/page/errorPost",
+        "/page/followersList","/page/subList","/"})
 public class SecurityFilter extends HttpFilter {
     private static final String KEY = "key";
 

@@ -1,4 +1,4 @@
-package controllers.users;
+package controllers.subscribes;
 
 import dao.SubscriptionDao;
 import sql.SqlSubscribeDao;

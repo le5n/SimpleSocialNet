@@ -7,7 +7,19 @@
 <html>
 <head>
     <title>my page</title>
-    <link rel="stylesheet" href="../_styles/pageStyle.css">
+<style>
+    #left {
+        float: left;
+        height: 100%;
+        width: 50%;
+    }
+
+    #right {
+        float: right;
+        height: 100%;
+        width: 50%;
+    }
+</style>
 </head>
 <body>
 <fmt:requestEncoding value="UTF-8" />
@@ -24,8 +36,6 @@
 <fmt:message key="date" var="date"/>
 <fmt:message key="userr" var="user"/>
 <fmt:message key="text" var="text"/>
-
-
 
 <span>${subs}: <a href="/subscribeList/"> ${countSubscribes:countSubscribes(requestScope["subscribes"])}</a></span>
 <span>${followers}: <a href="/followersList/"> ${countSubscribes:countSubscribes(requestScope["followers"])}</a></span>

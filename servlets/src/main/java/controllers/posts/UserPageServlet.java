@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Collection;
 
-@WebServlet("/page/")
+@WebServlet(urlPatterns = {"/page/", "/"})
 public class UserPageServlet extends HttpServlet {
 
     private static final String POSTS = "posts";

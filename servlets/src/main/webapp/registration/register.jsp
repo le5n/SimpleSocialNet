@@ -1,9 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <head>
-    <meta charset="utf-8">
+    <%--<meta charset="utf-8">--%>
     <title>Sign up</title>
-    <link rel="stylesheet" href="../_styles/style.css">
 </head>
 <body>
 <fmt:requestEncoding value="UTF-8"/>

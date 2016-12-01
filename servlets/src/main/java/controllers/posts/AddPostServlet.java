@@ -23,7 +23,7 @@ public class AddPostServlet extends HttpServlet {
         PostDao postDao = SqlPostDao.getInstance();
 
         String postText = request.getParameter("newPost");
-        if (postText.length() > POST_LENGTH) {
+        if (postText.length() > POST_LENGTH||postText.matches("\\s+")||postText.equals("")) {
             PrintWriter out = response.getWriter();
             forward("page/errorPost.jsp", request, response);
         } else {
