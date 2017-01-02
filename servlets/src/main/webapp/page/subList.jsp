@@ -9,9 +9,10 @@
 <fmt:setBundle basename="Bundle"/>
 <fmt:message key="subscribes" var="subscribes"/>
 <fmt:message key="myPage" var="myPage"/>
+<fmt:message key="logout" var="logout"/>
 <div align="right">
     <form action="/logout" method="POST">
-        <button type="submit">logout</button>
+        <button type="submit">${logout}</button>
     </form>
 </div>
 <div align="left">

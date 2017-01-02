@@ -12,7 +12,7 @@ import java.io.IOException;
 
 @WebFilter(urlPatterns = {"/login/successLogin.jsp","/login/alreadyLoged.jsp" ,"/page/allUsers.jsp",
         "/page/", "/page", "/page/userPage.jsp","/page/otherUserPage.jsp" , "/page/errorPost",
-        "/page/followersList","/page/subList","/"})
+        "/page/followersList","/page/subscribeList","/"})
 public class SecurityFilter extends HttpFilter {
     private static final String KEY = "key";
 

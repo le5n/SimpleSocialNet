@@ -435,3 +435,64 @@ java.sql.SQLIntegrityConstraintViolationException: Duplicate entry 'user@mail.co
 2016-12-02T01:38:37,693 [DEBUG] (SqlUserDao.java:42) - class sql.SqlUserDao constructor inited
 2016-12-02T01:38:37,978 [INFO ] (AddUserServlet.java:41) - new user added
 2016-12-02T01:40:12,878 [INFO ] (LoginServlet.java:44) - user logged in, userId = 23
+2016-12-02T01:43:30,027 [INFO ] (LogoutServlet.java:22) - session invalidate
+2016-12-02T13:13:20,095 [DEBUG] (SqlPostDao.java:35) - getting instance of SqlPostDao
+2016-12-02T13:13:20,107 [DEBUG] (SqlPostDao.java:45) - SqlPostDao constructor inited
+2016-12-02T13:13:20,109 [DEBUG] (ConnectionPool.java:26) - instance of connection pool inited
+2016-12-02T13:13:20,637 [DEBUG] (SqlSubscribeDao.java:33) - gettting instance of class sql.SqlSubscribeDao
+2016-12-02T13:13:20,638 [DEBUG] (SqlSubscribeDao.java:43) - class sql.SqlSubscribeDaoconstructor inited
+2016-12-02T13:13:46,887 [DEBUG] (SqlUserDao.java:32) - gettting instance of class sql.SqlUserDao
+2016-12-02T13:13:46,889 [DEBUG] (SqlUserDao.java:42) - class sql.SqlUserDao constructor inited
+2016-12-02T13:13:46,946 [INFO ] (LoginServlet.java:44) - user logged in, userId = 23
+2016-12-02T13:14:20,665 [INFO ] (LogoutServlet.java:22) - session invalidate
+2016-12-02T13:17:27,765 [DEBUG] (SqlPostDao.java:35) - getting instance of SqlPostDao
+2016-12-02T13:17:27,775 [DEBUG] (SqlPostDao.java:45) - SqlPostDao constructor inited
+2016-12-02T13:17:27,776 [DEBUG] (ConnectionPool.java:26) - instance of connection pool inited
+2016-12-02T13:17:28,125 [DEBUG] (SqlSubscribeDao.java:33) - gettting instance of class sql.SqlSubscribeDao
+2016-12-02T13:17:28,126 [DEBUG] (SqlSubscribeDao.java:43) - class sql.SqlSubscribeDaoconstructor inited
+2016-12-02T13:17:52,544 [DEBUG] (SqlUserDao.java:32) - gettting instance of class sql.SqlUserDao
+2016-12-02T13:17:52,545 [DEBUG] (SqlUserDao.java:42) - class sql.SqlUserDao constructor inited
+2016-12-02T13:17:52,603 [INFO ] (LoginServlet.java:44) - user logged in, userId = 21
+2016-12-02T13:21:01,796 [DEBUG] (SqlPostDao.java:35) - getting instance of SqlPostDao
+2016-12-02T13:21:01,807 [DEBUG] (SqlPostDao.java:45) - SqlPostDao constructor inited
+2016-12-02T13:21:01,809 [DEBUG] (ConnectionPool.java:26) - instance of connection pool inited
+2016-12-02T13:21:02,223 [DEBUG] (SqlSubscribeDao.java:33) - gettting instance of class sql.SqlSubscribeDao
+2016-12-02T13:21:02,224 [DEBUG] (SqlSubscribeDao.java:43) - class sql.SqlSubscribeDaoconstructor inited
+2016-12-02T13:22:16,711 [DEBUG] (SqlUserDao.java:32) - gettting instance of class sql.SqlUserDao
+2016-12-02T13:22:16,716 [DEBUG] (SqlUserDao.java:42) - class sql.SqlUserDao constructor inited
+2016-12-02T13:22:16,795 [INFO ] (LoginServlet.java:44) - user logged in, userId = 23
+2016-12-02T13:29:09,283 [DEBUG] (SqlPostDao.java:35) - getting instance of SqlPostDao
+2016-12-02T13:29:09,292 [DEBUG] (SqlPostDao.java:45) - SqlPostDao constructor inited
+2016-12-02T13:29:09,293 [DEBUG] (ConnectionPool.java:26) - instance of connection pool inited
+2016-12-02T13:29:09,670 [DEBUG] (SqlSubscribeDao.java:33) - gettting instance of class sql.SqlSubscribeDao
+2016-12-02T13:29:09,671 [DEBUG] (SqlSubscribeDao.java:43) - class sql.SqlSubscribeDaoconstructor inited
+2016-12-02T14:36:41,296 [DEBUG] (SqlPostDao.java:35) - getting instance of SqlPostDao
+2016-12-02T14:36:41,347 [DEBUG] (SqlPostDao.java:45) - SqlPostDao constructor inited
+2016-12-02T14:36:41,354 [DEBUG] (ConnectionPool.java:26) - instance of connection pool inited
+2016-12-02T14:36:42,488 [DEBUG] (SqlSubscribeDao.java:33) - gettting instance of class sql.SqlSubscribeDao
+2016-12-02T14:36:42,488 [DEBUG] (SqlSubscribeDao.java:43) - class sql.SqlSubscribeDaoconstructor inited
+2016-12-02T14:37:12,122 [DEBUG] (SqlUserDao.java:32) - gettting instance of class sql.SqlUserDao
+2016-12-02T14:37:12,125 [DEBUG] (SqlUserDao.java:42) - class sql.SqlUserDao constructor inited
+2016-12-02T14:37:12,183 [INFO ] (LoginServlet.java:44) - user logged in, userId = 23
+2016-12-02T16:33:27,972 [DEBUG] (SqlPostDao.java:35) - getting instance of SqlPostDao
+2016-12-02T16:33:28,021 [DEBUG] (SqlPostDao.java:45) - SqlPostDao constructor inited
+2016-12-02T16:33:28,029 [DEBUG] (ConnectionPool.java:26) - instance of connection pool inited
+2016-12-02T16:33:29,567 [DEBUG] (SqlSubscribeDao.java:33) - gettting instance of class sql.SqlSubscribeDao
+2016-12-02T16:33:29,569 [DEBUG] (SqlSubscribeDao.java:43) - class sql.SqlSubscribeDaoconstructor inited
+2016-12-02T16:33:48,001 [DEBUG] (SqlUserDao.java:32) - gettting instance of class sql.SqlUserDao
+2016-12-02T16:33:48,003 [DEBUG] (SqlUserDao.java:42) - class sql.SqlUserDao constructor inited
+2016-12-02T16:33:48,128 [INFO ] (LoginServlet.java:44) - user logged in, userId = 23
+2016-12-02T16:36:03,762 [INFO ] (LogoutServlet.java:22) - session invalidate
+2016-12-02T16:37:00,793 [ERROR] (AddUserServlet.java:47) - user cannot register beacuse of incorrect email or password repeat or he is already registered
+2016-12-02T16:38:55,909 [ERROR] (AddUserServlet.java:67) - user cannot register, he is already registered email=user@mail.com
+2016-12-02T16:38:55,911 [ERROR] (AddUserServlet.java:47) - user cannot register beacuse of incorrect email or password repeat or he is already registered
+2016-12-02T16:39:44,067 [INFO ] (AddUserServlet.java:41) - new user added
+2016-12-02T16:40:00,652 [INFO ] (LoginServlet.java:44) - user logged in, userId = 28
+2016-12-02T16:40:55,226 [INFO ] (LogoutServlet.java:22) - session invalidate
+2016-12-02T16:41:45,606 [INFO ] (AddUserServlet.java:41) - new user added
+2016-12-02T16:42:32,668 [INFO ] (LoginServlet.java:44) - user logged in, userId = 29
+2016-12-02T16:59:27,387 [DEBUG] (SqlPostDao.java:35) - getting instance of SqlPostDao
+2016-12-02T16:59:27,416 [DEBUG] (SqlPostDao.java:45) - SqlPostDao constructor inited
+2016-12-02T16:59:27,419 [DEBUG] (ConnectionPool.java:26) - instance of connection pool inited
+2016-12-02T16:59:27,973 [DEBUG] (SqlSubscribeDao.java:33) - gettting instance of class sql.SqlSubscribeDao
+2016-12-02T16:59:27,973 [DEBUG] (SqlSubscribeDao.java:43) - class sql.SqlSubscribeDaoconstructor inited

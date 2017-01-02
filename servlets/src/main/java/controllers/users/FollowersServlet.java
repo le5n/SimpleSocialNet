@@ -19,7 +19,6 @@ public class FollowersServlet extends HttpServlet {
     private static final String FOLLOWERS = "followers";
     private static final String PAGE_ID = "userID";
 
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         SubscriptionDao subscriptionDao = SqlSubscribeDao.getInstance();

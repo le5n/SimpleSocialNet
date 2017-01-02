@@ -23,7 +23,7 @@
 <fmt:message key="posts" var="posts"/>
 <div align="right">
     <form action="/logout" method="POST">
-        <button type="submit">logout</button>
+        <button type="submit">${logout}</button>
     </form>
 </div>
 

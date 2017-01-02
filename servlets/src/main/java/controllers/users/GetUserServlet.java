@@ -29,8 +29,14 @@ public class GetUserServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
 
+        int pageId = 0;
         int currentUserId = (int) session.getAttribute(CURRENT_USER_ID);
-        int pageId = Integer.parseInt(request.getParameter("userHref"));
+        try {
+            pageId = Integer.parseInt(request.getParameter("userHref"));
+        }
+        catch (NumberFormatException e){
+            forward("/page/", request,response);
+        }
         String lang = (String) session.getAttribute("lang");
 
         if (currentUserId == pageId) {

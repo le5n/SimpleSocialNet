@@ -16,7 +16,7 @@ import java.util.concurrent.BlockingQueue;
 
 public class ConnectionPool implements AutoCloseable {
     private BlockingQueue<PooledConnection> connectionQueue;
-    private static ConnectionPool instance;
+    private volatile static ConnectionPool instance;
     private static final Logger log = LogManager.getLogger(ConnectionPool.class);
 
     public static ConnectionPool getInstance(String pathConfig) {
